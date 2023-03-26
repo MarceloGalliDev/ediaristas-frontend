@@ -11,6 +11,7 @@
     "build-storybook": "storybook build"
   },
   "dependencies": {
+    "@storybook/addons": "^6.5.16",
     "@storybook/theming": "^6.5.16",
     "@types/node": "18.15.10",
     "@types/react": "18.0.29",

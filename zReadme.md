@@ -26,7 +26,10 @@
   - npx storybook@next upgrade --prerelease
   - npm install --save-dev css-loader
   - npm install --save-dev style-loader
-  
+
+  - adicionar arquivo .babelrc (copiar o código de dentro)
+  - adicionar arquivo webpack.config.js (copiar o código de dentro)
+  - adicionar no .eslintrc.json next/babel
 
   - usado para monitorar e fazer gestão dos componentes
 

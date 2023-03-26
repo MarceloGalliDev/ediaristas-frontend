@@ -1,5 +1,6 @@
 {
   "compilerOptions": {
+    "baseUrl": "src",
     "target": "es5",
     "lib": ["dom", "dom.iterable", "esnext"],
     "allowJs": true,
@@ -16,7 +17,8 @@
     "incremental": true,
     "paths": {
       "@/*": ["./src/*"],
-      "styles": ["./styles"]
+      "@styles/*": ["UI/styles/*"],
+      "@partials/*": ["UI/partials/*"],
     }
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],
