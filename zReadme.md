@@ -23,6 +23,11 @@
 
 ## 5 - Storybook
   - npx storybook init
+  - npx storybook@next upgrade --prerelease
+  - npm install --save-dev css-loader
+  - npm install --save-dev style-loader
+  
+
   - usado para monitorar e fazer gestão dos componentes
 
   - por padrao o storybook, não possui a função theme, temos que instalar
