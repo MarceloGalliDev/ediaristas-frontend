@@ -11,6 +11,11 @@
     "build-storybook": "storybook build"
   },
   "dependencies": {
+    "@emotion/css": "^11.10.6",
+    "@emotion/react": "^11.10.6",
+    "@emotion/server": "^11.10.0",
+    "@emotion/styled": "^11.10.6",
+    "@mui/material": "^5.11.14",
     "@storybook/addons": "^6.5.16",
     "@storybook/theming": "^6.5.16",
     "@types/node": "18.15.10",
