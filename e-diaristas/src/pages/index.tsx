@@ -15,8 +15,8 @@ export default function Home() {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <Button>Click</Button>
       <main className={styles.main}>
+        <Button variant="contained">Click</Button>
         <div className={styles.description}>
           <p>
             Get started by editing&nbsp;
