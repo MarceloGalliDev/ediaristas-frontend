@@ -2,7 +2,7 @@ import { Html, Head, Main, NextScript, DocumentProps, DocumentContext } from 'ne
 import Document from 'next/document'
 import React from 'react'
 import { AppType, AppProps } from "next/app";
-import createEmotionServer from '@emotion/server/types/create-instance';
+import createEmotionServer from "@emotion/server/create-instance";
 import createEmotionCache from 'data/services/EmotionCache';
 import { CacheProvider, EmotionCache } from "@emotion/react";
 
