@@ -20,6 +20,7 @@
     - copiar parte da configuração do site da UI Material
   - npm i --save @emotion/server @emotion/css
   - criando theme
+  - modificando o theme padrão da aplicação, no site do material UI tem o default theme e os paramêtros padrões
 
 ## 5 - Storybook
   - npx storybook init

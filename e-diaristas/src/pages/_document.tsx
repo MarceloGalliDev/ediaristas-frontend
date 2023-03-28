@@ -1,9 +1,14 @@
-import { Html, Head, Main, NextScript } from 'next/document'
+import { Html, Head, Main, NextScript, DocumentProps, DocumentContext } from 'next/document'
 import Document from 'next/document'
 import React from 'react'
+import { AppType, AppProps } from "next/app";
 import createEmotionServer from '@emotion/server/types/create-instance';
 import createEmotionCache from 'data/services/EmotionCache';
+import { CacheProvider, EmotionCache } from "@emotion/react";
 
+export interface MyAppProps extends AppProps {
+  emotionCache?: EmotionCache;
+}
 export default class MyDocument extends Document {
  render(): JSX.Element {
   return (
