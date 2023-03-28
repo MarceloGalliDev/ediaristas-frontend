@@ -44,6 +44,9 @@ const theme = createTheme({
   },
   typography: {
     fontFamily: 'Poppins, Roboto, sans-serif'
+  },
+  shape: {
+    borderRadius: 3,
   }
 })
 
