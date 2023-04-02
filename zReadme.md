@@ -35,10 +35,10 @@
   - usado para monitorar e fazer gestão dos componentes
 
   - por padrao o storybook, não possui a função theme, temos que instalar
-  - npm i @storybook/theming
+  - npm i @storybook/theming -D
 
   - temos que instalar o package addons
-  - npm i @storybook/addons
+  - npm i @storybook/addons -D
 
   - configurando o arquivo main.js do storybook
   - importar o css global dentro de preview.js
