@@ -10,7 +10,7 @@ import { Button as MuiButton } from '@mui/material'
 
 
 const meta: Meta<typeof Button> = {
-  title: 'Button',
+  title: 'testes/Button',
   component: Button,
   //args:{children: "click me!"}, aqui passo uma parametro se existir no ButtonProps
   //argTypes: {size: { control: "select" }}. aqui mudo o modelo dos botões do storybook
