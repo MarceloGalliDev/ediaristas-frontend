@@ -17,6 +17,7 @@ export const MeuBotao1: Story = {
   render: (args: any) => <RoundedButton {...args}>Click</RoundedButton>,
   args: {
     variant: "contained",
+    color: "error"
   },
 };
 
@@ -24,6 +25,6 @@ export const MeuBotao2: Story = {
   render: (args: any) => <RoundedButton {...args}>Click</RoundedButton>,
   args: {
     variant: "contained",
-    color: "primary",
+    color: "primary"
   },
 };
