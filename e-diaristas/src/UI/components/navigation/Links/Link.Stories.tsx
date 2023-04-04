@@ -9,6 +9,14 @@ const meta: Meta<typeof Link> = {
   //argTypes: {size: { control: "select" }}. aqui mudo o modelo dos botões do storybook
   //argTypes: {size: { control: "select" }, children: {options: ['Italic'], mapping: {Italic: <em>Italic text</em>}}}.
 };
-
 export default meta;
+
 type Story = StoryObj<typeof Link>;
+
+export const LinkPrimary: Story = {
+  render: (args) => <Link {...args}/>,
+  args: {
+    children: "Click me!",
+    href: "/#"
+  }
+};

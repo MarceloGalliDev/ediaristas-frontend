@@ -14,7 +14,7 @@ export default meta;
 type Story = StoryObj<typeof RoundedButton>;
 
 export const MeuBotao1: Story = {
-  render: (args: any) => <RoundedButton {...args}>Click</RoundedButton>,
+  render: (args) => <RoundedButton {...args}>Click</RoundedButton>,
   args: {
     variant: "contained",
     color: "error"
@@ -22,7 +22,7 @@ export const MeuBotao1: Story = {
 };
 
 export const MeuBotao2: Story = {
-  render: (args: any) => <RoundedButton {...args}>Click</RoundedButton>,
+  render: (args) => <RoundedButton {...args}>Click</RoundedButton>,
   args: {
     variant: "contained",
     color: "primary"
