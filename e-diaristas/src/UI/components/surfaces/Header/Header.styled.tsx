@@ -40,11 +40,14 @@ export const ButtonsContainer = styled("div")`
 `;
 
 export const HeaderDrawer = styled(Drawer)`
-  
+  .MuiPaper-root{
+    padding: ${({ theme }) => theme.spacing()};
+    background-color: ${({ theme }) => theme.palette.primary.main};
+    color: ${({ theme }) => theme.palette.primary.contrastText};
+  }
+
+  .MuiDivider-root{
+    margin: ${({ theme }) => theme.spacing(2)};
+    border-color: ${({ theme }) => theme.palette.primary.light};
+  }
 `;
-
-
-
-
-
-
