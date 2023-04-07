@@ -2,6 +2,18 @@ import { Container, ListItem, Typography } from '@mui/material';
 import { styled } from '@mui/material/styles';
 import { PropsWithChildren } from 'react';
 
+export const SocialContainer = styled('div')`
+  display: flex;
+  flex-direction: column;
+`;
+
+export const AppList = styled('ul')`
+  display: flex;
+  gap: ${({ theme }) => theme.spacing()};
+  list-style-type: none;
+  padding: 0;
+`;
+
 export const FooterContainer = styled('footer')`
   background-color: ${({ theme }) => theme.palette.primary.main};
   color: ${({ theme }) => theme.palette.primary.contrastText};
@@ -15,17 +27,13 @@ export const FooterGrid = styled(Container)`
   flex-wrap: wrap;
 `;
 
-
 export const FooterListItem = styled((props: PropsWithChildren) => (
   <ListItem disableGutters {...props} />
 ))``;
 
-export const FooterTitle = styled((props: PropsWithChildren) => (
+export const FooterTitle1 = styled((props: PropsWithChildren) => (
   <Typography variant={"body2"} component={"h2"} {...props}/>
 ))`
   font-weight: bold;
-`;// aqui usamos uma função para retorna o typografy, e usamos as props para ter acesso a elas, usamos do tipo children, props com filho
-
-export const SocialContainer = styled("div")`
-
 `;
+

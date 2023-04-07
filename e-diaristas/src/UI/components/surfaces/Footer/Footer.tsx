@@ -4,6 +4,7 @@ import {
   FooterTitle,
   FooterGrid,
   FooterListItem,
+  SocialContainer,
 } from "./Footer.styled";
 import Link from "UI/components/navigation/Links/Links";
 
@@ -44,10 +45,11 @@ const Footer = () => {
             com total segurança e praticidade! São milhares de clientes
             satisfeitos por todo o país.
           </Typography>
-
-
         </Box>
-        <FooterTitle>Baixe nossos aplicativos</FooterTitle>
+        <SocialContainer>
+          <FooterTitle>Baixe nossos aplicativos</FooterTitle>
+          <FooterTitle>Rede Sociais</FooterTitle>
+        </SocialContainer>
       </FooterGrid>
     </FooterContainer>
   )

@@ -21,6 +21,6 @@
       "@partials/*": ["UI/partials/*"],
     }
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "src/UI/components/surfaces/Footer/Footer.styled.ts"],
   "exclude": ["node_modules"]
 }
