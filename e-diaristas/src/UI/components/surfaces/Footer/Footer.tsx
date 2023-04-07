@@ -5,6 +5,9 @@ import {
   FooterGrid,
   FooterListItem,
   SocialContainer,
+  AppList,
+  FooterSocialList,
+  SocialButton,
 } from "./Footer.styled";
 import Link from "UI/components/navigation/Links/Links";
 
@@ -47,8 +50,38 @@ const Footer = () => {
           </Typography>
         </Box>
         <SocialContainer>
-          <FooterTitle>Baixe nossos aplicativos</FooterTitle>
-          <FooterTitle>Rede Sociais</FooterTitle>
+          <div>
+            <FooterTitle>Baixe nossos aplicativos</FooterTitle>
+            <AppList>
+              <li>
+                <a 
+                  href="https://apps.apple.com/br/app"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <img src="/img/logos/app-store.png" alt="AppStore" />
+                </a>
+              </li>
+              <li>
+                <a 
+                  href="https://play.google.com/store/apps"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <img src="/img/logos/google-play.png" alt="Google Play" />
+                </a>
+              </li>
+            </AppList>
+          </div>
+          <FooterTitle>
+            <FooterSocialList>
+              <FooterListItem>
+                <SocialButton>
+                  <i className="twf-facebook-f"/>
+                </SocialButton>
+              </FooterListItem>
+            </FooterSocialList>
+          </FooterTitle>
         </SocialContainer>
       </FooterGrid>
     </FooterContainer>

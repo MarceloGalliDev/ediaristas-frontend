@@ -1,4 +1,4 @@
-import { Container, ListItem, Typography } from '@mui/material';
+import { Container, IconButton, Link, ListItem, Typography, LinkProps, List } from '@mui/material';
 import { styled } from '@mui/material/styles';
 import { PropsWithChildren } from 'react';
 
@@ -12,6 +12,11 @@ export const AppList = styled('ul')`
   gap: ${({ theme }) => theme.spacing()};
   list-style-type: none;
   padding: 0;
+  margin: ${({ theme }) => theme.spacing(2,0,3)};
+
+  img {
+    width: 112px;
+  }
 `;
 
 export const FooterContainer = styled('footer')`
@@ -31,9 +36,19 @@ export const FooterListItem = styled((props: PropsWithChildren) => (
   <ListItem disableGutters {...props} />
 ))``;
 
-export const FooterTitle1 = styled((props: PropsWithChildren) => (
+
+export const FooterTitle = styled((props: PropsWithChildren) => (
   <Typography variant={"body2"} component={"h2"} {...props}/>
 ))`
-  font-weight: bold;
+font-weight: bold;
 `;
 
+export const SocialButton = styled((props: LinkProps<typeof IconButton>) => (
+  <Link component={IconButton} target={"_blank"} rel={"noopener noreferrer"} {...props} />
+))``;
+
+export const FooterSocialList = styled(List)`
+  display: grid;
+  grid-template-columns: repeat(3, 58px);
+  grid-gap: ${({ theme }) => theme.spacing(1.5)};
+`;
