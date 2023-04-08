@@ -41,7 +41,7 @@ export default function MyDocument({ emotionStyleTags }: MyDocumentProps) {
           rel="stylesheet"
         />
         <link
-          href="/e-diaristas/public/fonts/tw-icons/css/treinaweb-icons.css"
+          href="/fonts/tw-icons/css/treinaweb-icons.css"
           rel="stylesheet"
         />
         <meta name="emotion-insertion-point" content="" />

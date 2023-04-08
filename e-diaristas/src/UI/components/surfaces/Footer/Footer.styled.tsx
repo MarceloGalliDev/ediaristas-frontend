@@ -44,7 +44,7 @@ export const FooterGrid = styled(Container)`
 `;
 
 export const SocialButton = styled((props: LinkProps<typeof IconButton>) => (
-    <Link component={IconButton} target={"_blank"} rel={"noopener noreferrer"} {...props} />
+    <Link component={IconButton} target={"_blank"} rel={"noopener noreferrer"} {...props}/>
 ))`
   background-color: ${({ theme }) => theme.palette.primary.dark};
   width: 56px;
