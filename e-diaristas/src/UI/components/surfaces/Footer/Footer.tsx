@@ -80,10 +80,21 @@ const Footer = () => {
             </AppList>
           </div>
           <FooterTitle>
+            Redes Sociais
             <FooterSocialList>
               <FooterListItem>
-                <SocialButton>
+                <SocialButton href="/">
                   <i className="twf-facebook-f" />
+                </SocialButton>
+              </FooterListItem>
+              <FooterListItem>
+                <SocialButton href="/">
+                  <i className="twf-instagram" />
+                </SocialButton>
+              </FooterListItem>
+              <FooterListItem>
+                <SocialButton href="/">
+                  <i className="twf-youtube" />
                 </SocialButton>
               </FooterListItem>
             </FooterSocialList>

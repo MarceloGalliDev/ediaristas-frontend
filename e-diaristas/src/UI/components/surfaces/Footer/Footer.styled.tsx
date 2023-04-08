@@ -5,6 +5,11 @@ import { PropsWithChildren } from 'react';
 export const SocialContainer = styled('div')`
   display: flex;
   flex-direction: column;
+  ${({ theme }) => theme.breakpoints.down('md')}{
+    width: 100%;
+    flex-direction: column;
+    justify-content: space-between;
+  }
 `;
 
 export const AppList = styled('ul')`
@@ -32,19 +37,26 @@ export const FooterGrid = styled(Container)`
   flex-wrap: wrap;
 `;
 
-export const FooterListItem = styled((props: PropsWithChildren) => (
-  <ListItem disableGutters {...props} />
-))``;
-
+export const SocialButton = styled((props: LinkProps<typeof IconButton>) => (
+  <Link component={IconButton} target={"_blank"} rel={"noopener noreferrer"} {...props} />
+))`
+  background-color: ${({ theme }) => theme.palette.primary.dark};
+  width: 56px;
+  height: 56px;
+  
+  i {
+    color: ${({ theme }) => theme.palette.primary.contrastText};
+  };
+`;
 
 export const FooterTitle = styled((props: PropsWithChildren) => (
   <Typography variant={"body2"} component={"h2"} {...props}/>
 ))`
-font-weight: bold;
+  font-weight: bold;
 `;
 
-export const SocialButton = styled((props: LinkProps<typeof IconButton>) => (
-  <Link component={IconButton} target={"_blank"} rel={"noopener noreferrer"} {...props} />
+export const FooterListItem = styled((props: PropsWithChildren) => (
+  <ListItem disableGutters {...props} />
 ))``;
 
 export const FooterSocialList = styled(List)`
