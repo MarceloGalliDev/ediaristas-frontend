@@ -5,4 +5,5 @@ export const AppContainer = styled("div")`
   display: flex;
   flex-direction: column;
   background-color: #fff;
+  color: ${({ theme }) => theme.palette.text.secondary};
 `; 

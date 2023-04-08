@@ -1,4 +1,5 @@
 import { styled } from "@mui/material/styles";
+import { Container } from "@mui/material";
 
 export const SectionContainer = styled('section')`
   min-height: 250px;
@@ -16,3 +17,29 @@ export const SectionContainer = styled('section')`
     background-position: center;
   }
 `;
+
+export const ContainerStyled = styled(Container)`
+  display: grid;
+  grid-template-rows: repeat(3, auto);
+  grid-template-areas: "title" "subtitle" "button";
+  align-content: center;
+
+  //acima de medium device
+  ${({ theme }) => theme.breakpoints.up("md")} {
+    grid-template-columns: 450px minmax(200px, 450px); //se ajusta ao tamanho da página
+    grid-template-rows: 125px 55px 60px;
+    grid-column: "title picture" "subtitle picture" "button picture";
+    gap: ${({ theme }) => theme.spacing(4)};
+    align-items: center;
+    align-content: center;
+    justify-content: space-between;
+    justify-items: center;
+    min-height: 450px;
+  }
+
+  ${({ theme }) => theme.breakpoints.down("md")} {
+    max-width: 350px;
+  }
+`;
+
+export const SectionTitle = styled('h1')``;
