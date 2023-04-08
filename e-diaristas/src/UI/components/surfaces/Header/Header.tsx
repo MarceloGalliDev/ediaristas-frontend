@@ -23,7 +23,7 @@ export default Header;
 
 const HeaderDesktop: React.FC = () => {
   return (
-    <HeaderAppBar position="sticky">
+    <HeaderAppBar>
       <Toolbar component={Container}>
         <LinkV2 href="/">
           <HeaderLogo src="img/logos/logo.svg" alt="e-diaristas"/>

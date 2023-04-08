@@ -22,7 +22,7 @@ export default function App(props: MyAppProps) {
     <CacheProvider value={emotionCache}>
       <Head>
         <meta name="viewport" content="initial-scale=1, width=device-width" />
-        <title>E-Diaristas {pageProps.title && `- ${pageProps.title}`}</title>
+        <title>E-Diaristas</title>
       </Head>
       <ThemeProvider theme={theme}>
         <CssBaseline />

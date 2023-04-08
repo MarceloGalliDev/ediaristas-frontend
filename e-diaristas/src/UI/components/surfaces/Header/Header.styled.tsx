@@ -1,7 +1,9 @@
-import { AppBar, Drawer } from "@mui/material";
+import { AppBar, Drawer, AppBarProps } from "@mui/material";
 import { styled } from "@mui/material/styles";
 
-export const HeaderAppBar = styled(AppBar)`
+export const HeaderAppBar = styled((props: AppBarProps) => (
+  <AppBar position="sticky" {...props}/>
+))`
   &.MuiAppBar-root {
     background-color: ${({ theme }) =>
       theme.palette.background.paper}; //aqui acessamos o theme

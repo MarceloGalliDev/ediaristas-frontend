@@ -1,17 +1,14 @@
 import Head from 'next/head'
 import Image from 'next/image'
 import type { NextPage, GetStaticProps } from "next";
-
-export const getStaticProps: GetStaticProps = async () => {
-  return {
-    props: {
-      title: ""
-    }
-  };
-};
+import Presentation from '@partials/index/_presentation';
 
 const Index: NextPage = () => {
-  return <div>teste</div>
+  return (
+    <div>
+      <Presentation />
+    </div>
+  )
 }
 
 export default Index;
