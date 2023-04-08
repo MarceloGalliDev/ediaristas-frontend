@@ -10,6 +10,7 @@ import {
   SocialButton,
 } from "./Footer.styled";
 import Link from "UI/components/navigation/Links/Links";
+import LinkV2 from "UI/components/navigation/Links/LinksV2";
 
 const Footer = () => {
   return (
@@ -19,30 +20,32 @@ const Footer = () => {
           <FooterTitle>Menu</FooterTitle>
           <List>
             <FooterListItem>
-              <Link
+              <LinkV2
                 href="/encontrar-diarista"
                 mui={{ color: "inherit", variant: "body2" }}
-              >
-                Encontrar um(a) diarista
-              </Link>
+              >Encontrar um(a) diarista
+              </LinkV2>
             </FooterListItem>
             <FooterListItem>
-              <Link
+              <LinkV2
                 href="/encontrar-diarista"
                 mui={{ color: "inherit", variant: "body2" }}
-              >
-                Seja um(a) diarista
-              </Link>
+              >Seja um(a) diarista
+              </LinkV2>
             </FooterListItem>
             <FooterListItem>
-              <Link href="/" mui={{ color: "inherit", variant: "body2" }}>
-                Por que usar o e-diarista
-              </Link>
+              <LinkV2
+                href="/" 
+                mui={{ color: "inherit", variant: "body2" }}
+              >Por que usar o e-diarista
+              </LinkV2>
             </FooterListItem>
             <FooterListItem>
-              <Link href="/" mui={{ color: "inherit", variant: "body2" }}>
-                Principais Dúvidas
-              </Link>
+              <LinkV2
+                href="/" 
+                mui={{ color: "inherit", variant: "body2" }}
+              >Principais Dúvidas
+              </LinkV2>
             </FooterListItem>
           </List>
         </div>

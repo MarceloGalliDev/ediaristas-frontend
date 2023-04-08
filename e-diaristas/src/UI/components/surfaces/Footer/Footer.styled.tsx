@@ -1,6 +1,7 @@
-import { Container, IconButton, Link, ListItem, Typography, LinkProps, List } from '@mui/material';
+import { Container, IconButton, ListItem, Typography, LinkProps, List, Link } from '@mui/material';
 import { styled } from '@mui/material/styles';
 import { PropsWithChildren } from 'react';
+import LinkV2 from 'UI/components/navigation/Links/LinksV2';
 
 export const SocialContainer = styled("div")`
   display: flex;
@@ -43,7 +44,7 @@ export const FooterGrid = styled(Container)`
 `;
 
 export const SocialButton = styled((props: LinkProps<typeof IconButton>) => (
-  <Link component={IconButton} target={"_blank"} rel={"noopener noreferrer"} {...props} />
+    <Link component={IconButton} target={"_blank"} rel={"noopener noreferrer"} {...props} />
 ))`
   background-color: ${({ theme }) => theme.palette.primary.dark};
   width: 56px;

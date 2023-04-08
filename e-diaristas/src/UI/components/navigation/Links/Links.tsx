@@ -2,6 +2,7 @@ import NextLink, { LinkProps as NextLinkProps } from 'next/link'
 import { Link as MuiLink, LinkProps as MuiLinkProps, ButtonProps } from "@mui/material"
 import { PropsWithChildren } from 'react';
 import Router from 'next/router';
+import { styled } from "@mui/material/styles";
 
 //definindo props para nosso componente
 //mui? é tipagem derivada do mui material
@@ -12,40 +13,35 @@ interface LinkProps {
   mui?: MuiLinkProps | ButtonProps;
   next?: NextLinkProps;
   Component?: React.ElementType;
+  target?: string;
+  rel?: string;
 }
+
+const Anchor = styled("a")({});
 
 const Link: React.FC<PropsWithChildren<LinkProps>> = ({ 
   children,
   href,
   mui,
   next,
+  target,
+  rel,
   Component = MuiLink,
   ...props
  }) => {
   const isNextEnv = Boolean(Router.router);
 
   return isNextEnv ? (
-    <NextLink 
-      href={href}
-      {...next} 
-      passHref
-    >
-      <Component
-        {...mui}
-        {...props}
-      >
-        {children}
-      </Component>
+    <NextLink href={href} {...next} passHref>
+        <Component {...mui} {...props}>
+          {children}
+        </Component>
     </NextLink>
   ) : (
-    <Component 
-      href={href}
-      {...mui}
-      {...props}
-    >
-      {children}
+    <Component href={href} {...mui} {...props}>
+        {children}
     </Component>
-  );
+);
 };
 
 export default Link;
