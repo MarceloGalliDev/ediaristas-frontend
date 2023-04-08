@@ -1,4 +1,4 @@
-import { Html, Head, Main, NextScript, DocumentProps, DocumentContext } from 'next/document'
+import { Html, Head, Main, NextScript, DocumentProps, DocumentContext, DocumentInitialProps } from 'next/document'
 import Document from 'next/document'
 import React from 'react'
 import { AppType, AppProps } from "next/app";

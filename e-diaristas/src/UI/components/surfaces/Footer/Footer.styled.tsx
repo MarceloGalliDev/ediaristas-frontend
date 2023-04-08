@@ -2,14 +2,19 @@ import { Container, IconButton, Link, ListItem, Typography, LinkProps, List } fr
 import { styled } from '@mui/material/styles';
 import { PropsWithChildren } from 'react';
 
-export const SocialContainer = styled('div')`
+export const SocialContainer = styled("div")`
   display: flex;
   flex-direction: column;
-  ${({ theme }) => theme.breakpoints.down('md')}{
+
+  ${({ theme }) => theme.breakpoints.down("md")} {
     width: 100%;
-    flex-direction: column;
+    flex-direction: row-reverse;
     justify-content: space-between;
-  }
+  };
+
+  ${({ theme }) => theme.breakpoints.down(726)}{
+    flex-direction: column;
+  };
 `;
 
 export const AppList = styled('ul')`
