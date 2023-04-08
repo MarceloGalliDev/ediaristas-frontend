@@ -9,6 +9,7 @@ import Head from "next/head";
 import CssBaseline from "@mui/material/CssBaseline";
 import { CacheProvider, EmotionCache } from "@emotion/react";
 import createEmotionCache from "../data/services/createEmotionCache";
+import { AppContainer } from "@styles/pages/AppContainer.styled";
 
 const clientSideEmotionCache = createEmotionCache();
 export interface MyAppProps extends AppProps {
@@ -21,12 +22,17 @@ export default function App(props: MyAppProps) {
     <CacheProvider value={emotionCache}>
       <Head>
         <meta name="viewport" content="initial-scale=1, width=device-width" />
-        <title>E-Diaristas</title>
+        <title>E-Diaristas {pageProps.title && `- ${pageProps.title}`}</title>
       </Head>
       <ThemeProvider theme={theme}>
         <CssBaseline />
-        <Component {...pageProps} />
-        <Footer />
+        <AppContainer>
+          <Header />
+          <main>
+            <Component {...pageProps} />
+          </main>
+          <Footer />
+        </AppContainer>
       </ThemeProvider>
     </CacheProvider>
   );

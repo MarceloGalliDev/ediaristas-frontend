@@ -6,6 +6,7 @@ import {
   HeaderDrawer,
 } from "./Header.styled"; 
 import Link from "UI/components/navigation/Links/Links";
+import LinkV2 from "UI/components/navigation/Links/LinksV2";
 import RoundedButton from "UI/components/inputs/RoundedButton/RoundedButton";
 import { useState } from "react";
 import useIsMobile from "data/hook/useIsMobile";
@@ -22,25 +23,26 @@ export default Header;
 
 const HeaderDesktop: React.FC = () => {
   return (
-    <HeaderAppBar>
+    <HeaderAppBar position="sticky">
       <Toolbar component={Container}>
-        <Link href="/">
+        <LinkV2 href="/">
           <HeaderLogo src="img/logos/logo.svg" alt="e-diaristas"/>
-        </Link>
+        </LinkV2>
         <div>&nbsp;</div>
         <div>&nbsp;</div>
         <ButtonsContainer>
-          <Link 
-            Component={RoundedButton} 
-            mui={{variant: "contained", color: "primary"}} 
-            href="/cadastro/diarista"
-          >Seja um(a) diarista
-          </Link>
-          <Link 
-            Component={RoundedButton}
-            href="/login"
-          >Login
-          </Link>
+          <RoundedButton variant="contained" color="primary">
+            <LinkV2 
+              href="/cadastro/diarista"
+            >Seja um(a) diarista
+            </LinkV2>
+          </RoundedButton>
+          <RoundedButton variant="contained" color="secondary">
+            <LinkV2 
+              href="/login"
+            >Login
+            </LinkV2>
+          </RoundedButton>
         </ButtonsContainer>
       </Toolbar>
     </HeaderAppBar>)
@@ -59,22 +61,22 @@ const HeaderMobile: React.FC = () => {
         >
           <i className="twf-bars" />
         </IconButton>
-        <Link href="/">
+        <LinkV2 href="/">
           <HeaderLogo src="img/logos/logo.svg" alt="e-diaristas" />
-        </Link>
+        </LinkV2>
         <HeaderDrawer 
           open={isDrawerOpen} 
           onClose={() => setIsDrawerOpen(false)}
           onClick={() => setIsDrawerOpen(false)}
         >
           <MenuList>
-            <Link href="/login" Component={MenuItem}>
+            <LinkV2 href="/login" Component={MenuItem}>
               Login
-            </Link>
+            </LinkV2>
             <Divider />
-            <Link href="/cadastro/diarista" Component={MenuItem}>
+            <LinkV2 href="/cadastro/diarista" Component={MenuItem}>
               Seja um(a) diarista
-            </Link>
+            </LinkV2>
           </MenuList>
         </HeaderDrawer>
       </Toolbar>

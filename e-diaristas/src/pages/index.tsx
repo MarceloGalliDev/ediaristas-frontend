@@ -1,13 +1,17 @@
 import Head from 'next/head'
 import Image from 'next/image'
-import { Inter } from 'next/font/google'
-import styles from '@styles/Home.module.css'
-import { Button } from '@mui/material'
+import type { NextPage, GetStaticProps } from "next";
 
-const inter = Inter({ subsets: ['latin'] })
+export const getStaticProps: GetStaticProps = async () => {
+  return {
+    props: {
+      title: ""
+    }
+  };
+};
 
-export default function Home() {
-  return (
-    <div></div>
-  )
+const Index: NextPage = () => {
+  return <div>teste</div>
 }
+
+export default Index;
