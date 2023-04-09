@@ -112,6 +112,7 @@ const LinkV2 = React.forwardRef<HTMLAnchorElement, LinkProps>(function Link(prop
     legacyBehavior,
     locale,
     children,
+    mui
   };
 
   if (noLinkStyle) {
@@ -125,6 +126,7 @@ const LinkV2 = React.forwardRef<HTMLAnchorElement, LinkProps>(function Link(prop
       ref={ref}
       {...nextjsProps}
       {...other}
+      
     />
   );
 });
