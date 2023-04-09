@@ -5,6 +5,7 @@ import { PropsWithChildren } from "react";
 
 
 export const SectionContainer = styled('section')`
+  position: relative;
   min-height: 250px;
   background-image: url('/img/home/living-room.svg');
   background-repeat: no-repeat;
@@ -31,9 +32,9 @@ export const ContainerStyled = styled(Container)`
   ${({ theme }) => theme.breakpoints.up("md")} {
     grid-template-columns: 450px minmax(200px, 450px); //se ajusta ao tamanho da página
     grid-template-rows: 125px 55px 60px;
-    grid-template-areas: 
-      "title picture" 
-      "subtitle picture" 
+    grid-template-areas:
+      "title picture"
+      "subtitle picture"
       "button picture";
     gap: ${({ theme }) => theme.spacing(4)};
     align-items: center;
@@ -41,16 +42,27 @@ export const ContainerStyled = styled(Container)`
     justify-content: space-between;
     justify-items: center;
     min-height: 450px;
-  };
+  }
 
   ${({ theme }) => theme.breakpoints.down("md")} {
     max-width: 350px;
-  };
+    justify-content: center;
+  }
 
-  .buttonSection{
-    grid-area: button;
-    width: 405px;
-    height: 100%;
+  .buttonSection {
+    ${({ theme }) => theme.breakpoints.up("md")} {
+      width: 405px;
+      justify-content: center;
+      grid-area: button;
+      height: 100%;
+    };
+
+    ${({ theme }) => theme.breakpoints.down("md")} {
+      max-width: 350px;
+      justify-content: center;
+      grid-area: button;
+      height: 100%;
+    };
   };
 `;
 
@@ -113,7 +125,7 @@ export const SectionPictureContainer = styled("div")`
     width: 95%;
     position: relative;
     top: 25px;
-    right: 60px;
+    right: 25px;
     z-index: 2;
   }
 
@@ -141,12 +153,31 @@ export const SectionPictureContainer = styled("div")`
     background-color: ${({ theme }) => theme.palette.grey[200]};
     width: 40px;
     height: 40px;
-    bottom: 32%;
+    bottom: 0;
     right: 13%;
     z-index: 1;
   }
 `;
 
+export const BottomButton = styled('span')`
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translate(-50%, 50%);
+  background-color: ${({ theme }) => theme.palette.secondary.main};
+  border-radius: 50%;
+  padding: 11px 12px;
+  color: ${({ theme }) => theme.palette.common.white};
+  border: 5px solid currentColor;
+
+  i {
+    position: relative;
+    left: -1px;
+  }
+`;
+
+
 export const SectionButton = styled((props: PropsWithChildren<LinkProps>) => (
   <LinkV2 {...props}/>
 ))``;
+

@@ -5,7 +5,8 @@ import {
   SectionSubtitle,
   SectionTitle,
   SectionButton,
-  SectionPictureContainer
+  SectionPictureContainer,
+  BottomButton
 } from "./_presentation.styled";
 import RoundedButton from "UI/components/inputs/RoundedButton/RoundedButton";
 
@@ -42,6 +43,9 @@ const Presentation = () => {
         </SectionPictureContainer>
 
       </ContainerStyled>
+      <BottomButton>
+        <i className="twf-caret-down"/>
+      </BottomButton>
     </SectionContainer>
   ); 
 };
