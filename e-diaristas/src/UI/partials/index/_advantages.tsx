@@ -54,10 +54,10 @@ const Advantages = () => {
               <ListItem key={index}>
                 <ListItemAvatar>
                   <AvatarStyled>
-                    <i className="twf-certificate"/>
+                    <i className={item.icon}/>
                   </AvatarStyled>
                 </ListItemAvatar>
-                <ListItemTextStyled primary={"Diversidade"} secondary={"Mais de 5 mil profissionais esperando por você."}/>
+                <ListItemTextStyled primary={item.title} secondary={item.description}/>
               </ListItem>
             )
           })}
