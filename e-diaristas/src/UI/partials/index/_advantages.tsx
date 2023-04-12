@@ -1,43 +1,38 @@
 import { Container, ListItem, ListItemAvatar } from "@mui/material";
-import { AvatarStyled, GradientBackground, ListItemTextStyled, ListStyle, SectionTitle } from "./_advantages.style";
+import { AvatarStyled, GradientBackground, ListDivider, ListItemTextStyled, ListStyle, SectionTitle } from "./_advantages.style";
 
 const Advantages = () => {
   const advantegeList = [
     {
       icon: "twf-woman",
       title: "Diversidade",
-      description: "São mais de 5 mil profissionais esperando por você."
-
+      description: "São mais de 5 mil profissionais esperando por você.",
     },
     {
-      icon: "twf-certificade",
+      icon: "twf-certificate",
       title: "Confiabilidade",
-      description: "Todos profissionais aqui listados possuem verificação de segurança."
-
+      description: "Todos profissionais aqui listados possuem verificação de segurança.",
     },
     {
       icon: "twf-search-2",
       title: "Rastreabilidade",
-      description: "Acesse o histórico dos profissionais."
-
+      description: "Acesse o histórico dos profissionais.",
     },
     {
       icon: "twf-frame-broken",
       title: "Segurança",
-      description: "Seguro sobre qualquer possível dano."
-
+      description: "Seguro sobre qualquer possível dano.",
     },
     {
       icon: "twf-payment",
       title: "Controle",
-      description: "Pagamento é realizado somente com o profissional em seu local de destino, com confirmação."
-
+      description:
+        "Pagamento é realizado somente com o profissional em seu local de destino, com confirmação.",
     },
     {
       icon: "twf-broom-bucket",
       title: "Experiência",
-      description: "Mais de 50 mil diarias realizadas."
-
+      description: "Mais de 50 mil diarias realizadas.",
     },
   ];
 
@@ -51,14 +46,17 @@ const Advantages = () => {
 
           {advantegeList.map((item, index) => {
             return (
-              <ListItem key={index}>
-                <ListItemAvatar>
-                  <AvatarStyled>
-                    <i className={item.icon}/>
-                  </AvatarStyled>
-                </ListItemAvatar>
-                <ListItemTextStyled primary={item.title} secondary={item.description}/>
-              </ListItem>
+              <>
+                <ListDivider></ListDivider>
+                <ListItem key={index}>
+                  <ListItemAvatar>
+                    <AvatarStyled>
+                      <i className={item.icon}/>
+                    </AvatarStyled>
+                  </ListItemAvatar>
+                  <ListItemTextStyled primary={item.title} secondary={item.description}/>
+                </ListItem>
+              </>
             )
           })}
           
