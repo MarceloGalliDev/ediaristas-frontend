@@ -1,5 +1,6 @@
 import { Container, ListItem, ListItemAvatar } from "@mui/material";
 import { AvatarStyled, GradientBackground, ListDivider, ListItemTextStyled, ListStyle, SectionTitle } from "./_advantages.style";
+import { Fragment } from "react";
 
 const Advantages = () => {
   const advantegeList = [
@@ -52,18 +53,21 @@ const Advantages = () => {
 
           {advantegeList.map((item, index) => {
             return (
-              <>
-                <ListDivider></ListDivider>
-                <ListItem key={item.id}>
+              <Fragment key={item.id}>
+                {index !== 0 && <ListDivider />}
+                <ListItem>
                   <ListItemAvatar>
                     <AvatarStyled>
-                      <i className={item.icon}/>
+                      <i className={item.icon} />
                     </AvatarStyled>
                   </ListItemAvatar>
-                  <ListItemTextStyled primary={item.title} secondary={item.description}/>
+                  <ListItemTextStyled
+                    primary={item.title}
+                    secondary={item.description}
+                  />
                 </ListItem>
-              </>
-            )
+              </Fragment>
+            );
           })}
           
 
