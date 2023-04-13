@@ -1,4 +1,5 @@
-import { styled } from "@mui/material";
+import { styled } from "@mui/material/styles";
+import { Accordion } from "@mui/material";
 
 export const Wave = styled("img")`
   width: 100%;
@@ -34,7 +35,12 @@ export const SectionSubtitle = styled("p")`
   }
 `;
 
+export const AccordionStyled = styled(Accordion)` 
+
+`;
+
 export const SectionContainer = styled("section")`
   padding-bottom: ${({ theme }) => theme.spacing(7)}
 `;
+
 
