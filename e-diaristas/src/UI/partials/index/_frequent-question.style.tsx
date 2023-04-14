@@ -46,11 +46,11 @@ export const AccordionStyled = styled(Accordion)`
 
     &::before {
       background-color: transparent;
-
-      &,
-      &.Mui-expanded {
-        margin: -2px 0 0;
-      };
+    };
+    
+    &,
+    &.Mui-expanded {
+      margin: -2px 0 0;
     };
 
     .NuiAccordionDetails-root {

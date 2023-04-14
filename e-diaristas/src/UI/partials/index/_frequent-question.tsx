@@ -35,6 +35,14 @@ const FrequentQuestion = () => {
     return activeAccordion === accordionIndex
   };
 
+  function changeOpenAccordion(accordionIndex: number): void {
+    if(isOpen(accordionIndex)){
+      setActiveAccordion(0);
+    }else{
+      setActiveAccordion(accordionIndex)
+    }
+  };
+
   function getIcons(accordionIndex: number): string {
     return isOpen(accordionIndex) ? "twf-minus" : "twf-plus";
   };
@@ -47,16 +55,20 @@ const FrequentQuestion = () => {
         <SectionSubtitle>Veja abaixo as perguntas frequentes</SectionSubtitle>
 
           {questionsList.map((item, index) => (
-            <AccordionStyled key={index}>
+            <AccordionStyled 
+              key={index}
+              expanded={isOpen(index + 1)}
+              onChange={() => changeOpenAccordion(index + 1)}
+            >
               <AccordionSummary expandIcon={<i className={getIcons(index + 1)} />}>
                 <Typography color={'primary'}>
-                  asdasd
+                  {item.question}
                 </Typography>
               </AccordionSummary>
 
               <AccordionDetails>
                 <Typography>
-                  asdasd
+                  {item.answer}
                 </Typography>
               </AccordionDetails>
             </AccordionStyled>
