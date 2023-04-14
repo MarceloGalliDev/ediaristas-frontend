@@ -36,6 +36,32 @@ export const SectionSubtitle = styled("p")`
 `;
 
 export const AccordionStyled = styled(Accordion)` 
+  .MuiAccordionSummary-content .MuiTypography-root {
+    font-weight: bold;
+  };
+
+  &.MuiAccordion-root {
+    box-shadow: none;
+    border: 2px solid ${({ theme }) => theme.palette.primary.main};
+
+    &::before {
+      background-color: transparent;
+
+      &,
+      &.Mui-expanded {
+        margin: -2px 0 0;
+      };
+    };
+
+    .NuiAccordionDetails-root {
+      padding-right: ${({ theme }) => theme.spacing(7)};
+    };
+
+    .MuiAccordionSumary-expandIconWrapper {
+      color: ${({ theme }) => theme.palette.text.secondary};
+    }
+  };
+
 
 `;
 
