@@ -44,4 +44,5 @@
   - importar o css global dentro de preview.js
   - criamos o arquivo preview_head.html, e tem que ser com mesmo nome, para o storybook reconhecer o arquivo, ali colocaremos os links
 
-#397FB5
+## 6 - Django Rest Framework
+  - 
