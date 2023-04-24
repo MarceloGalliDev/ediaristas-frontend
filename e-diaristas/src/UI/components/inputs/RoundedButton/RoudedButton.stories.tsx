@@ -2,6 +2,8 @@ import React from 'react';
 import RoundedButton from './RoundedButton';
 import type { Meta, StoryObj } from "@storybook/react";
 
+type Story = StoryObj<typeof RoundedButton>;
+
 const meta: Meta<typeof RoundedButton> = {
   title: "inputs/RoundedButton",
   component: RoundedButton,
@@ -11,7 +13,6 @@ const meta: Meta<typeof RoundedButton> = {
 };
 
 export default meta;
-type Story = StoryObj<typeof RoundedButton>;
 
 export const MeuBotao1: Story = {
   render: (args) => <RoundedButton {...args}>Click</RoundedButton>,

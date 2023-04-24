@@ -1,6 +1,6 @@
-const path = require('path')
+const path = require("path");
 
-const toPath = (_path) => path.join(process.cwd(), _path)
+const toPath = (_path) => path.join(process.cwd(), _path);
 
 module.exports = {
   webpackFinal: async (config) => {
@@ -17,12 +17,12 @@ module.exports = {
 
     return config;
   },
-  stories: ["../src/**/*.mdx", "../src/**/*.stories.@(js|jsx|ts|tsx)"],
+  stories: ["../src/**/*.stories.@(js|jsx|ts|tsx)"],
   addons: [
     "@storybook/addon-links",
     "@storybook/addon-essentials",
     "@storybook/addon-interactions",
-    "@storybook/addon-mdx-gfm",
+    "storybook-addon-next"
   ],
   framework: {
     name: "@storybook/nextjs",
@@ -32,7 +32,12 @@ module.exports = {
     autodocs: true,
     defaultName: "Documentation",
   },
-  staticDirs: ["../public"],
+  staticDirs: [
+    {
+      from: "../public/fonts",
+      to: "public/fonts",
+    },
+  ],
   core: {
     builder: "@storybook/builder-webpack5",
   },

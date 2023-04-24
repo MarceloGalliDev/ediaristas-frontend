@@ -21,6 +21,6 @@
       "@partials/*": ["UI/partials/*"],
     }
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "src/UI/components/surfaces/Footer/Footer.styled.ts"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "src/UI/components/surfaces/Footer/Footer.styled.ts", "public/fonts/tw-icons/font/LocalFont.js"],
   "exclude": ["node_modules"]
 }
