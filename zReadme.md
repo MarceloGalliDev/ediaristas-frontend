@@ -44,5 +44,8 @@
   - importar o css global dentro de preview.js
   - criamos o arquivo preview_head.html, e tem que ser com mesmo nome, para o storybook reconhecer o arquivo, ali colocaremos os links
 
-## 6 - Django Rest Framework
-  - 
+## 6 - Jest Test
+  - npm i -D jest
+  - criamos um arquivo teste
+  - função de teste , test(Função_a_ser_testada_nome, () => {aqui dentro executamos a função})
+  - dentro da função executamos com o expect e depois o .toBe(aqui é o resultado esperado)
