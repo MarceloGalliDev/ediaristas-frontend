@@ -18,10 +18,6 @@ export const parameters = {
   },
 }
 
-export const decorators = [
-  withThemeFromJSXProvider({
-    StoryThemeProvider,
-  })
-]
+export const decorators = [StoryThemeProvider]
 
 //quando incluimos dentro do preview ele é destinado ao global
