@@ -6,4 +6,5 @@ export const SafeEnvironmentContainer = styled('div')`
   font-size: 12px;
   text-align: right;
   padding: ${({ theme }) => theme.spacing(2, 0)};
+  font-family: ${({ theme }) => theme.typography.fontFamily}
 `;

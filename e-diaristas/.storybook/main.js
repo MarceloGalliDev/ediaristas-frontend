@@ -1,3 +1,4 @@
+import remarkGfm from "remark-gfm";
 const path = require("path");
 
 const toPath = (_path) => path.join(process.cwd(), _path);
@@ -17,12 +18,23 @@ module.exports = {
 
     return config;
   },
-  stories: ["../src/**/*.stories.@(js|jsx|ts|tsx)"],
+  stories: ["../src/**/*.stories.mdx", "../src/**/*.stories.@(js|jsx|ts|tsx)"],
   addons: [
     "@storybook/addon-links",
     "@storybook/addon-essentials",
     "@storybook/addon-interactions",
-    "storybook-addon-next"
+    "@storybook/addon-styling",
+    "storybook-addon-next",
+    {
+      name: "@storybook/addon-docs",
+      options: {
+        mdxPluginOptions: {
+          mdxCompilerOptions: {
+            remarkPlugins: [remarkGfm],
+          },
+        },
+      },
+    },
   ],
   framework: {
     name: "@storybook/nextjs",
@@ -32,12 +44,7 @@ module.exports = {
     autodocs: true,
     defaultName: "Documentation",
   },
-  staticDirs: [
-    {
-      from: "../public/fonts",
-      to: "public/fonts",
-    },
-  ],
+  staticDirs: ["../public"],
   core: {
     builder: "@storybook/builder-webpack5",
   },
