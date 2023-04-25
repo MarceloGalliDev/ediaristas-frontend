@@ -5,4 +5,10 @@ export const PageTitleContainer = styled('div')`
   text-align: center;
 `;
 
-export const PageTitleStyled = styled('h2')``;
+export const PageTitleStyled = styled('h2')`
+  font-family: ${({ theme }) => theme.typography.fontFamily};
+`;
+
+export const PageSubtitleStyled = styled("h3")`
+  font-family: ${({ theme }) => theme.typography.fontFamily};
+`;

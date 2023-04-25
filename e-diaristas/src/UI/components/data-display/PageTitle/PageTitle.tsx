@@ -1,5 +1,5 @@
 import { PropsWithChildren } from "react";
-import { PageTitleContainer } from "./PageTitle.styled";
+import { PageSubtitleStyled, PageTitleContainer, PageTitleStyled } from "./PageTitle.styled";
 
 export interface PageTitleProps {
   title: string;
@@ -8,7 +8,10 @@ export interface PageTitleProps {
 
 const PageTitle:React.FC<PropsWithChildren<PageTitleProps>> = ({title, subtitle, children}) => {
   return (
-    <PageTitleContainer>PageTitle</PageTitleContainer>
+    <PageTitleContainer>
+      <PageTitleStyled>{title}</PageTitleStyled>
+      <PageSubtitleStyled>{subtitle}</PageSubtitleStyled>
+    </PageTitleContainer>
   )
 }
 
