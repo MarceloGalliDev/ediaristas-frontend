@@ -49,3 +49,5 @@
   - criamos um arquivo teste
   - função de teste , test(Função_a_ser_testada_nome, () => {aqui dentro executamos a função})
   - dentro da função executamos com o expect e depois o .toBe(aqui é o resultado esperado)
+  - criamos o arquivo de config.jest
+  - instalamos o npm i -D babel-jest

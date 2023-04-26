@@ -44,6 +44,7 @@
     "@storybook/nextjs": "^7.0.0-rc.8",
     "@storybook/react": "^7.0.0-rc.8",
     "@storybook/testing-library": "^0.0.14-next.1",
+    "babel-jest": "^29.5.0",
     "babel-loader": "^8.3.0",
     "css-loader": "^6.7.3",
     "eslint-plugin-storybook": "^0.6.11",

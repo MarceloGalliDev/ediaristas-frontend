@@ -1,6 +1,6 @@
 
 
-function soma(a, b) {
+function soma(a: number, b:number) {
   return a + b
 }
 
