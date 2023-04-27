@@ -51,3 +51,19 @@
   - dentro da função executamos com o expect e depois o .toBe(aqui é o resultado esperado)
   - criamos o arquivo de config.jest
   - instalamos o npm i -D babel-jest
+  - instalamos também npm i -D @babel/core
+  - criamos o arquivo de config .babelrc e indicamos uma config dentro
+  - importamos no arquivo de teste o React
+  - o jest so executa funções java script (expect*)
+
+  - para executar teste em componentes precisamos de ferramentas adicionais
+    - como a npm i -D @testing-library/react
+    - como o teste ele executa do lado do navegador é necessário que indicamos isso no config do Jest
+    - para executarmos um teste em componentes usaremos 
+      - npm i -D @testing-library/jest-dom
+      - npm i jest-environment-jsdom 
+      - toBeVisible() exemplo de função para verificar se está visível
+      - setupTeste.js é para deixar padrao os imports
+  
+  - instalando PLOP, para criar testes automatizados
+    - npm i -D plop
