@@ -7,5 +7,7 @@ export const TextFieldStyled = styled(TextField)<TextFieldProps>`
     background-color: ${({ theme }) => theme.palette.grey[50]};
   }
 
-  
+  .MuiOutlinedInput-notchedOutline {
+    border-color: ${({ theme }) => theme.palette.grey[100]};
+  }
 `;
