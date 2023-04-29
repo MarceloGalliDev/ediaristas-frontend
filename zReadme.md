@@ -66,4 +66,4 @@
       - setupTeste.js é para deixar padrao os imports
   
   - instalando PLOP, para criar testes automatizados
-    - npm i -D plop
+    - TextFieldProps
