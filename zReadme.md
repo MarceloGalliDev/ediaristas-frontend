@@ -68,6 +68,6 @@
   - instalando PLOP, para criar testes automatizados
     - TextFieldProps
 
-## 7 - Criando componente Maks
+## 7 - Criando componente Mask
   - instalamos a biblioteca npm i react-input-maks
   - instalamos os types npm i --save-dev @types/react-input-mask
