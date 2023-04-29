@@ -4,8 +4,9 @@ import TextField from '../TextField/TextField';
 import { OutlinedTextFieldProps } from '@mui/material';
 // import {} from './TextFieldMask.styled';
 
-export interface TextFieldMaskProps extends OutlinedTextFieldProps {
+export interface TextFieldMaskProps extends Omit<OutlinedTextFieldProps, 'variant'> {
   mask: string,
+  variant?: string
 }
 
 const TextFieldMask:React.FC<PropsWithChildren<TextFieldMaskProps>> = ({
@@ -13,9 +14,15 @@ const TextFieldMask:React.FC<PropsWithChildren<TextFieldMaskProps>> = ({
   value,
   onChange,
   onBlur, 
+  ...props
 }) => {
   return (
-    <InputMask mask={mask}>{() => <TextField />}</InputMask>
+    <InputMask 
+      mask={mask} 
+      value={value}
+      onChange={onChange}
+      onBlur={onBlur}
+    >{() => <TextField {...props} variant={'outlined'}/>}</InputMask>
   )  
 }
 

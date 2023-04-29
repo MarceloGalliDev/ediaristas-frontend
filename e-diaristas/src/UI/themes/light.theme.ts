@@ -47,6 +47,15 @@ const theme = createTheme({
   },
   shape: {
     borderRadius: 3,
+  },
+  components: {
+    MuiButton: {
+      styleOverrides: {
+        root: {
+          textTransform: "none",
+        }
+      }
+    }
   }
 })
 
