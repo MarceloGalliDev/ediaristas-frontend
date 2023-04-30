@@ -9,14 +9,24 @@ export interface UserInformationProps {
   rating: number;
   description?: string;
   sx?: SystemProps
+  isRating?: boolean;
 }
 
-const UserInformation:React.FC<PropsWithChildren<UserInformationProps>> = ({sx, picture}) => {
+const UserInformation: React.FC<PropsWithChildren<UserInformationProps>> = ({
+  sx,
+  picture,
+  name,
+  rating,
+  description,
+}) => {
   return (
-    <UserInformationContainer sx={sx}>
-      <AvatarStyled src={picture}></AvatarStyled>
+    <UserInformationContainer sx={sx} isRating>
+      <AvatarStyled src={picture}>{name[0]}</AvatarStyled>
+      <RatingStyled value={rating} readOnly />
+      <UserName>{name}</UserName>
+      <UserDescription>{description}</UserDescription>
     </UserInformationContainer>
-  );  
-}
+  );
+};
 
 export default UserInformation

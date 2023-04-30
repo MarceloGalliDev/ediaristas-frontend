@@ -11,7 +11,8 @@ const meta: Meta<typeof UserInformation> = {
     name: "Marcelo",
     picture: "https://github.com/MarceloGalliDev.png",
     rating: 5,
-    description: 'FullStack developer'
+    description: 'FullStack developer',
+    isRating: true
   },
 };
 
@@ -19,5 +20,4 @@ export default meta;
 
 export const ComponentStory: Story = {
   render: (args: any) => <UserInformation {...args} />,
-  args: {},
 };
