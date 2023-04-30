@@ -1,12 +1,50 @@
 import { styled } from '@mui/material/styles';
-//import { } from '@mui/material/';
+import { Container, Paper } from '@mui/material/';
 //import { VerificarProfissionaisProps } from './VerificarProfissionais'
 
+export const ElementsContainer = styled(Container)`
+  margin-bottom: 60px;
+  align-items: center;
+`;
+
 export const FormElementsContainer = styled('div')`
-  color: ${({ theme }) => theme.palette.text.secondary};
-  background-color: ${({ theme }) => theme.palette.background.default};
-  font-size: 12px;
-  text-align: right;
-  padding: ${({ theme }) => theme.spacing(2, 0)};
-  font-family: ${({ theme }) => theme.typography.fontFamily}
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: ${({ theme }) => theme.spacing(5)};
+  max-width: 650px;
+  margin: 0 auto ${({ theme }) => theme.spacing(7)};
+
+  ${({ theme }) => theme.breakpoints.down('md')} {
+    gap: ${({ theme }) => theme.spacing(3)};
+  };
+`;
+
+export const ProfissionaisPaper = styled(Paper)`
+  padding: ${({ theme }) => theme.spacing(7)};
+  margin: ${({ theme }) => theme.spacing(10)};
+
+  ${({ theme }) => theme.breakpoints.down('md')} {
+    box-shadow: none;
+    padding: 0;
+  }
+`;
+
+export const ProfissionaisContainer = styled("div")`
+  display: grid;
+  grid-template-columns: 1fr;
+
+  ${({ theme }) => theme.breakpoints.up("md")} {
+    grid-template-columns: repeat(2, 1fr);
+    gap: ${({ theme }) => theme.spacing(6)};
+  };
+
+  ${({ theme }) => theme.breakpoints.down("md")} {
+    margin-left: ${({ theme }) => theme.spacing(-2)};
+    margin-right: ${({ theme }) => theme.spacing(-2)};
+
+    > :nth-of-type(odd) {
+      background-color: ${({ theme }) => theme.palette.background.paper};
+    }
+  };
 `;
