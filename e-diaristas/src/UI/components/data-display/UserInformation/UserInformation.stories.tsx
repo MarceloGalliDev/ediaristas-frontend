@@ -12,12 +12,12 @@ const meta: Meta<typeof UserInformation> = {
     picture: "https://github.com/MarceloGalliDev.png",
     rating: 5,
     description: 'FullStack developer',
-    isRating: true
+    isRating: true,
   },
 };
 
 export default meta;
 
 export const ComponentStory: Story = {
-  render: (args: any) => <UserInformation {...args} />,
+  render: (args: any) => <UserInformation isRating={true} {...args} />,
 };

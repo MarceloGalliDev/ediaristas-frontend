@@ -1,25 +1,31 @@
 import { styled } from '@mui/material/styles';
-import { Avatar, Box, Rating, Theme } from '@mui/material/';
+import { Avatar, Box, Rating, Theme } from '@mui/material';
 //import { UserInformationProps } from './UserInformation'
 
 function handleGrid(theme: Theme, isRating?: boolean){
-  if (!isRating){
+  if(!isRating){
     return `
+      padding: ${theme.spacing(3)};
+
       grid-template-columns: 60px 1fr;
-      grid-template-areas:
+      grid-template-rows: repeat(3, auto);
+      grid-template-areas: 
         "avatar name"
         "avatar rating"
-        "avatar description";
-      grid-template-rows: repeat(3, auto);
+        "avatar description"
+      ;
+      `;
+    }
+    return `
+      padding: ${theme.spacing(2, 4)};
+
+      grid-template-columns: 45px 1fr auto;
+      grid-template-rows: repeat(2, auto);
+      grid-template-areas: 
+        "avatar name rating"
+        "avatar description rating"
+      ;
     `;
-  }
-  return `
-    grid-template-columns: 45px 1fr auto;
-    grid-template-rows: repeat(2, auto);
-    grid-template-areas:
-      "avatar name rating"
-      "avatar description rating"
-  `;
 }
 
 
@@ -53,22 +59,14 @@ export const RatingStyled = styled(Rating)`
 `;
 
 export const UserInformationContainer = styled(Box, {
-  shouldForwardProp: (props) => props !== "isRating",
-})<{ isRating?: boolean }>`
+  shouldForwardProp: (props) => props !== 'isRating',
+})< {isRating?: boolean}>`
   display: grid;
   gap: ${({ theme }) => theme.spacing(0.5, 2)};
   align-items: center;
-  background-color: ${({ theme, isRating }) =>
-    theme.palette.grey[isRating ? 100 : 50]};
+  background-color: ${({ theme, isRating }) => theme.palette.grey[isRating ? 100 : 50]};
+  
+  ${({theme, isRating}) => handleGrid(theme, isRating)}
 
-  ${({ theme, isRating }) => handleGrid(theme, isRating)}
 
-  padding: ${({ theme }) => theme.spacing(3)};
-
-  grid-template-columns: 60px 1fr;
-  grid-template-areas:
-    "avatar name"
-    "avatar rating"
-    "avatar description";
-  grid-template-rows: repeat(3, auto);
 `;

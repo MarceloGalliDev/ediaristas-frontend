@@ -18,9 +18,10 @@ const UserInformation: React.FC<PropsWithChildren<UserInformationProps>> = ({
   name,
   rating,
   description,
+  isRating,
 }) => {
   return (
-    <UserInformationContainer sx={sx} isRating>
+    <UserInformationContainer sx={sx} isRating={isRating}>
       <AvatarStyled src={picture}>{name[0]}</AvatarStyled>
       <RatingStyled value={rating} readOnly />
       <UserName>{name}</UserName>
