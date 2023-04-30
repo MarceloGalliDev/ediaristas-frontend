@@ -1,12 +1,13 @@
 import { styled } from '@mui/material/styles';
-//import { } from '@mui/material/';
+import { Avatar, Box, Rating } from '@mui/material/';
 //import { UserInformationProps } from './UserInformation'
 
-export const ComponentName = styled('div')`
-  color: ${({ theme }) => theme.palette.text.secondary};
-  background-color: ${({ theme }) => theme.palette.background.default};
-  font-size: 12px;
-  text-align: right;
-  padding: ${({ theme }) => theme.spacing(2, 0)};
-  font-family: ${({ theme }) => theme.typography.fontFamily}
-`;
+export const UserInformationContainer = styled(Box)``;
+
+export const UserName = styled('div')``;
+
+export const UserDescription = styled('div')``;
+
+export const AvatarStyled = styled(Avatar)``;
+
+export const RatingStyled = styled(Rating)``;
