@@ -71,3 +71,37 @@
 ## 7 - Criando componente Mask
   - instalamos a biblioteca npm i react-input-maks
   - instalamos os types npm i --save-dev @types/react-input-mask
+
+## 8 - Criando componentes de buscar profissional
+
+## 9 - Criando lógica de buscar de cep
+
+## 10 - Instalando Axios
+  - npm install axios
+  - const [cep, setCep] = useState(""),
+      [error, setError] = useState(""),
+      [buscaFeita, setBuscaFeita] = useState(false),
+      [carregando, setCarregando] = useState(false),
+      [diaristas, setDiaristas] = useState<UserShortInformationInterface[]>([]),
+      [diaristasRestantes, setDiaristasRestantes] = useState(0),
+      cepValidado = ValidationService.cep(cep);
+      Quando montamos nesse formato, se ocorrer um erro em alguma linha, toda constante é executada novamente.
+  
+  - useMemo(() => {}, []), essa função ela é tida para armazenamento em cache de determinado dado, o array de dependencias é usado para ser executado quando tive alteração naquele dado, similar a useEffect()
+
+  - try {
+      const { data } = await ApiService.get<BuscaCepResponse>(`/api/diaristas/localidades?cep=${cep.replace(/\D/g, "")}`); 
+
+      setBuscaFeita(true);
+      setDiaristas(data.diaristas);
+      setDiaristasRestantes(data.quantidade_diaristas);
+    } catch (error) {
+      setError('CEP não encontrado!');
+    } finally {
+      setCarregando(false);
+    };
+    - aqui fazemos o tratamento de busca, usando o finally que tem a função de executar mesmo que de um erro, ou que foi capturado um erro na aplicação
+
+## 10 - Testes com Cypress
+  - teste em tempo real
+  - npm i -D cypress
