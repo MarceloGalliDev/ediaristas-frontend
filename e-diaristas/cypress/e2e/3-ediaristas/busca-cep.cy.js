@@ -17,6 +17,8 @@ context('Busca pelo CEP', () => {
   });
 
   it('buscar cep', () => {
-    
+    cy.get('.MuiOutlinedInput-input').type('01001000')
+    cy.get('button').type(/buscar/i).click()
+    cy.get('div').type('São Paulo').should('be.visible')
   })
 })

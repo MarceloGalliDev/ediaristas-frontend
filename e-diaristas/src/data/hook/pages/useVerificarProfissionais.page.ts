@@ -1,5 +1,5 @@
 import { useMemo, useState } from "react";
-import { BuscaCepResponse, UserShortInformationInterface } from "data/@types/userInterface";
+import { BuscaCepResponse, UserShortInformationInterface } from "data/@types/UserInterface";
 import { ValidationService } from "data/services/ValidationService";
 import { ApiService } from "data/services/ApiService";
 
