@@ -10,7 +10,6 @@ import {
 } from "./_verificar-profissionais.styled"; 
 import TextFieldMask from 'UI/components/inputs/TextFieldMask/TextFieldMask';
 import UserInformation from 'UI/components/data-display/UserInformation/UserInformation';
-import { color } from '@storybook/theming';
 import useVerificarProfissionais from 'data/hook/pages/useVerificarProfissionais.page';
 
 const VerificarProfissionais: React.FC<PropsWithChildren> = () => {
