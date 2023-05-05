@@ -1,8 +1,13 @@
 {
-  "extends": ["next/babel", "next/core-web-vitals"],
+  "extends": ["next/babel", "next/core-web-vitals", "prettier"],
+  "plugins": ["prettier"],
   "rules": {
     "@next/next/no-img-element": "off",
-    "@next/next/no-css-tags": "off"
-    
+    "@next/next/no-css-tags": "off",
+    "prettier/prettier": ["error", {"endOfLine": "auto"}],
+    "semi": ["error", "aways"]
+    //"quotes": ["error", "double"],
   }
 }
+
+//na propriedade extends, em uma lista, pode haver subscrição de comandos, do proximo arquivo na sequência
