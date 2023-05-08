@@ -134,3 +134,7 @@
 ## 14 - Criando componentes de formulário
 - componentes de serviços disponibilizados
 - componentes de dados pessoais
+
+## 15 - Instalando UuID
+- biblioteca para geração de id's universais únicos
+- npm i uuid

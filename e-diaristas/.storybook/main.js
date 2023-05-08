@@ -42,7 +42,7 @@ module.exports = {
   },
   docs: {
     autodocs: true,
-    defaultName: "Documentation",
+    defaultName: 'Docs',
   },
   staticDirs: ["../public"],
   core: {
