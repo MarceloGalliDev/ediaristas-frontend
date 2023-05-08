@@ -138,3 +138,4 @@
 ## 15 - Instalando UuID
 - biblioteca para geração de id's universais únicos
 - npm i uuid
+- npm i --save-dev @types/uuid

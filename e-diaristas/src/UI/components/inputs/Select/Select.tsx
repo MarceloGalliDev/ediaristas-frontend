@@ -1,6 +1,7 @@
-import React, {PropsWithChildren} from 'react';
+import React, {PropsWithChildren, useState} from 'react';
 import { FormControl, InputLabel, SelectProps as MuiSelectProps } from '@mui/material';
 import { SelectStyled } from './Select.styled';
+import { v4 as uuid} from 'uuid'; 
 // import {} from './Select.styled';
 
 export interface SelectProps extends MuiSelectProps {
@@ -13,6 +14,7 @@ const Select:React.FC<PropsWithChildren<SelectProps>> = ({
   style, 
   ...props
 }) => {
+  const [elementId, setElementeId] = useState(uuid())
   return (
     <FormControl variant='outlined' style={style}>
       <InputLabel id={"meuLabel"}>{ label }</InputLabel>
