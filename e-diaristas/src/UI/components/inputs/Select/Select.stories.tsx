@@ -22,6 +22,12 @@ export const ComponentStory: Story = {
     </Select>
   ),
   args: {
-    label: ""
+    label: "Números"
   },
+  argTypes: {
+    label: {
+      description: 'Valores para seleção',
+      defaultValue: 'Números',
+    }
+  }
 };

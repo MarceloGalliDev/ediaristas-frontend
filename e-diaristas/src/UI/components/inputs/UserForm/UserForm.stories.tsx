@@ -1,18 +1,18 @@
 import React from "react";
 import type { Meta, StoryObj } from "@storybook/react";
-import {{ name }} from "./{{ name }}";
+import UserForm from "./UserForm";
 
-type Story = StoryObj<typeof {{ name }}>;
+type Story = StoryObj<typeof UserForm>;
 
-const meta: Meta<typeof {{ name }}> = {
-  title: "{{ type }}/{{ name }}",
-  component: {{ name }},
+const meta: Meta<typeof UserForm> = {
+  title: "inputs/UserForm",
+  component: UserForm,
 };
 
 export default meta;
 
 export const ComponentStory: Story = {
-  render: (args: any) => <{{ name }} {...args} />,
+  render: (args: any) => <UserForm {...args} />,
   args: {},
   argTypes: {
     argumentoName: {

@@ -1,4 +1,4 @@
-import React, {PropsWithChildren, useState} from 'react';
+import React, {PropsWithChildren, useEffect, useState} from 'react';
 import { FormControl, InputLabel, SelectProps as MuiSelectProps } from '@mui/material';
 import { SelectStyled } from './Select.styled';
 import { v4 as uuid} from 'uuid'; 
@@ -14,11 +14,18 @@ const Select:React.FC<PropsWithChildren<SelectProps>> = ({
   style, 
   ...props
 }) => {
-  const [elementId, setElementeId] = useState(uuid())
+  const [elementId, setElementeId] = useState('');
+
+  useEffect(() => {
+    if(window !== undefined) {
+    setElementeId(uuid())
+    }
+  }, []);
+
   return (
     <FormControl variant='outlined' style={style}>
-      <InputLabel id={"meuLabel"}>{ label }</InputLabel>
-      <SelectStyled labelId='' label={label} {...props}>{children}</SelectStyled>
+      <InputLabel id={elementId}>{ label }</InputLabel>
+      <SelectStyled labelId={elementId} label={label} {...props}>{children}</SelectStyled>
     </FormControl>
   )  
 }

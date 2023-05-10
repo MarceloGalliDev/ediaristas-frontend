@@ -139,3 +139,48 @@
 - biblioteca para geração de id's universais únicos
 - npm i uuid
 - npm i --save-dev @types/uuid
+- vamos usar a função uuid dentro de um useEffect pelo fato que se eu não fizer dessa maneira no NEXT.JS ele vai acabar executando duas vezes, um vez no server side e outra na client side
+- esse if window é para verificação se a janela esta aberta sem uma seleção no botão
+
+## 16 - Verificação de password, strenght
+- npm i check-password-strength
+  - Property	Desc.
+    id	0 = Too weak, 1 = Weak & 2 = Medium, 3 = Strong
+    value	Too weak, Weak, Medium & Strong
+    contains	lowercase, uppercase, symbol and/or number
+    length	length of the password
+
+## 17 - Criação de componente de side
+- Quando criamos um map dentro de outro map, podemos utilizar o mesmo nome de index e variaveis desde que esteja em escopos diferentes
+
+## 18 - React Hook Form
+- npm i react-hook-form
+- utilizamos o hook:
+  - useForm() 
+    - cria o formulário, o contexto
+    - register = nos retorna um value, onChange, onBlur
+      - value = valor do botão
+      - onChange = acontece quando eu digito
+      - onBlur = quando eu tiro o foco do botão (target)
+      - {...register('nameProduto', {required: true})}
+    - button = quando usamos um button, e usamos o enviar, acionamos a função onSubmit={handleSubmit(nameFunction)}
+    exemplo:
+      const {register, handleSubmit} = useForm();
+  - formState()
+    - fica observando as validações do formulário
+  - useFormContext
+    - não temos o resolver nesse hook
+    - é usado para recuperar o useForm()
+    - função watch, fica observando mudanças de dados
+
+- usando o yup
+  - npm i yup
+  - shape() = corpo do objeto
+    - produto: yup.object().shape()
+    - tenho que definir o tipo da propriedade
+
+- para fazer a ligação do yup com hook
+  - npm i @hookform/resolvers
+  - método yupResolver
+  - useForm() possui uma função para junção, resolver: yupResolver(campo ou item)
+
