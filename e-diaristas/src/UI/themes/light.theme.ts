@@ -77,7 +77,20 @@ const theme = createTheme({
           boxShadow: '0px 0px 39px rgba(0,0,0,0.1)'
         }
       }
-    }
+    },
+    MuiTextField: {
+      defaultProps: {
+        InputLabelProps: {
+          required: false,
+        },
+        required: true,
+      }
+    },
+    MuiSelect: {
+      defaultProps: {
+        required: true,
+      }
+    },
   }
 })
 

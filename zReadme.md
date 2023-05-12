@@ -183,4 +183,10 @@
   - npm i @hookform/resolvers
   - método yupResolver
   - useForm() possui uma função para junção, resolver: yupResolver(campo ou item)
+  - quando foi renderizar um elemento na confirmação dentro de outro elemento, temos que usar o controller
 
+- plataforma de pagamento
+- npm i pagarme
+- defined() é um método que verifica se tudo está preenchido conforme proposto
+
+- componente de UserForm
