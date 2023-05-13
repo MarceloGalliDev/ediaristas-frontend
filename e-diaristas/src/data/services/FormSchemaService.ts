@@ -62,7 +62,8 @@ export const FormSchemaService = {
   address(){
     return yup.object().shape({
       endereco: yup.object().shape({
-        cep: yup.string(),
+        cep: yup.string().test('cep', 'CEP inválido', ValidationService.cep),
+        //cep: yup.string().test('cep', 'CEP inválido', (value) => ValidationService.cep(value)),
         estado: yup.string(),
         cidade: yup.string(),
         bairro: yup.string(),
