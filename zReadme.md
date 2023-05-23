@@ -190,3 +190,5 @@
 - defined() é um método que verifica se tudo está preenchido conforme proposto
 
 - componente de UserForm
+
+# 19 - Formulário de contratação
