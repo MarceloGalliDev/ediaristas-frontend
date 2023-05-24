@@ -4,7 +4,8 @@ import { Controller } from "react-hook-form";
 import TextFieldMask from "../../TextFieldMask/TextFieldMask";
 import TextField from "../../TextField/TextField";
 import Select from "../../Select/Select";
-import { Autocomplete, MenuItem } from "@mui/material";
+import { MenuItem } from "@mui/material";
+import Autocomplete from '@mui/material/Autocomplete';
 
 export const AddressForm = () => {
   const { control, errors, estados, opcoesCidades, addressState, register } = useAddressForm();
@@ -59,12 +60,15 @@ export const AddressForm = () => {
             onChange={(_event, newValue) => inputProps.onChange(newValue)}
             disablePortal
             style={{ gridArea: 'cidade' }}
-            options={[opcoesCidades]}
+            options={opcoesCidades}
             disabled={addressState === ''}
-            loading={[opcoesCidades].length === 0}
+            loading={opcoesCidades.length === 0}
             loadingText={'Carregando cidades...'}
             noOptionsText={'Cidade inexistente!'}
             renderInput={(params) => <TextField {...params} label={'Cidade'} />}
+            isOptionEqualToValue={(option, value) =>
+              option == value
+            }
           />
         )}
       />
@@ -117,7 +121,6 @@ export const AddressForm = () => {
         helperText={errors?.endereco?.complemento?.message}
         required={false}
       />
-      
     </AddressData>
   );
 } 

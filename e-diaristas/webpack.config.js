@@ -16,5 +16,8 @@ module.exports = {
     fallback: {
       util: require.resolve("util/"),
     },
+    alias: {
+      '@mui/styled-engine': '@mui/styled-engine-sc'
+    },
   },
 };

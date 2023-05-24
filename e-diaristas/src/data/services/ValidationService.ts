@@ -44,4 +44,18 @@ export const ValidationService = {
     if (rev != parseInt(cpf.charAt(10))) return false;
     return true;
   },
+
+  horarioDeAgendamento(data: string, hora: string): boolean {
+    const agora = Date.now();
+    const dataHora = new Date(data + 'T' + hora).getTime();
+    const diferenca = ((((dataHora - agora) / 1000) / 60) / 60);
+    const minHora = 48
+
+    return diferenca> minHora;
+  },
+
+  hora(horario = ''): boolean {
+    //expressões regulares sempre entre barras, | separa os casos, ˆ = tem que começar no modelo, $ = terminar no modelo
+    return /^([01][0-9]|2[0-3]):([0-5][0-9])$/.test(horario);
+  }
 };
