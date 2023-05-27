@@ -3,6 +3,7 @@ import { useState } from "react";
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup'
 import { FormSchemaService } from "data/services/FormSchemaService";
+import { ServicoInterface } from "data/@types/ServicoInterface";
 
 
 export default function useContratacao() {
@@ -13,11 +14,15 @@ export default function useContratacao() {
     resolver: yupResolver(
       FormSchemaService.address().concat(FormSchemaService.detalheServico())
     )
-  });
+  }),
+
+  servicos: ServicoInterface[] = [
+
+  ];
   
   function onServiceFormSubmit(data: NovaDiariaFormDataInterface) {
     console.log(data)
   }
 
-  return { step, breadcrumbItems, serviceForm, onServiceFormSubmit };
+  return { step, breadcrumbItems, serviceForm, onServiceFormSubmit, servicos };
 }

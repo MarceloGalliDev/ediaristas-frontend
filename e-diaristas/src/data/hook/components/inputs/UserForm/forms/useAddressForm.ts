@@ -20,10 +20,8 @@ export default function useAddressForm() {
     ]),
     estados = LocationService.estados(),
     listaCidades = useCities(addressState),
-    opcoesCidades = useMemo(
-      () => listaCidades.map((item) => item.cidade),
-      [listaCidades]
-    );
+    opcoesCidades = useMemo(() => listaCidades.map((item) => item.cidade),[listaCidades]);
+    
 
   useEffect(() => {
     register('endereco.codigo_ibge');
@@ -55,6 +53,7 @@ export default function useAddressForm() {
         }
       });
     }
+    
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [addressCep]);
 
@@ -65,7 +64,9 @@ export default function useAddressForm() {
     register,
     estados,
     opcoesCidades,
+    listaCidades,
     control,
     errors,
   };
 }
+

@@ -8,7 +8,9 @@ import { MenuItem } from "@mui/material";
 import Autocomplete from '@mui/material/Autocomplete';
 
 export const AddressForm = () => {
-  const { control, errors, estados, opcoesCidades, addressState, register } = useAddressForm();
+  const { control, errors, estados, opcoesCidades, addressState, register } =
+    useAddressForm();
+    
   return (
     <AddressData>
       <Controller
@@ -27,7 +29,6 @@ export const AddressForm = () => {
           />
         )}
       />
-
       <Controller
         name={'endereco.estado'}
         defaultValue={''}
@@ -49,7 +50,6 @@ export const AddressForm = () => {
           </Select>
         )}
       />
-
       <Controller
         name={'endereco.cidade'}
         defaultValue={''}
@@ -59,20 +59,22 @@ export const AddressForm = () => {
             {...inputProps}
             onChange={(_event, newValue) => inputProps.onChange(newValue)}
             disablePortal
-            style={{ gridArea: 'cidade' }}
             options={opcoesCidades}
+            style={{ gridArea: 'cidade' }}
             disabled={addressState === ''}
             loading={opcoesCidades.length === 0}
             loadingText={'Carregando cidades...'}
-            noOptionsText={'Cidade inexistente!'}
-            renderInput={(params) => <TextField {...params} label={'Cidade'} />}
-            isOptionEqualToValue={(option, value) =>
-              option == value
+            noOptionsText={'Nenhuma cidade com esse nome'}
+            renderInput={(params) => 
+              <TextField
+                label={'Cidade'}
+                {...params}
+                InputLabelProps={{ required: false }}
+              />
             }
           />
         )}
       />
-
       <Controller
         name={'endereco.bairro'}
         defaultValue={''}
@@ -87,7 +89,6 @@ export const AddressForm = () => {
           />
         )}
       />
-
       <Controller
         name={'endereco.logradouro'}
         defaultValue={''}
@@ -102,7 +103,6 @@ export const AddressForm = () => {
           />
         )}
       />
-
       <TextField
         label={'Número'}
         style={{ gridArea: 'numero' }}
@@ -111,7 +111,6 @@ export const AddressForm = () => {
         error={errors?.endereco?.numero !== undefined}
         helperText={errors?.endereco?.numero?.message}
       />
-
       <TextField
         label={'Complemento'}
         style={{ gridArea: 'complemento' }}
@@ -123,4 +122,5 @@ export const AddressForm = () => {
       />
     </AddressData>
   );
-} 
+};
+

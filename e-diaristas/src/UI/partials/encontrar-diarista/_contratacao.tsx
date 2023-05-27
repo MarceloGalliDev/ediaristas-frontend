@@ -35,7 +35,7 @@ const Contratacao: React.FC<PropsWithChildren> = () => {
                 onSubmit={serviceForm.handleSubmit(onServiceFormSubmit)}
                 hidden={step !== 1}
               >
-                <DetalheServico></DetalheServico>
+                <DetalheServico />
               </form>
             </FormProvider>
           </Paper>
