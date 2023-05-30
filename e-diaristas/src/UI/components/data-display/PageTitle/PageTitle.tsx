@@ -3,7 +3,7 @@ import { PageSubtitleStyled, PageTitleContainer, PageTitleStyled } from "./PageT
 
 export interface PageTitleProps {
   title: string;
-  subtitle?: string;
+  subtitle?: string | JSX.Element;
 }
 
 const PageTitle:React.FC<PropsWithChildren<PageTitleProps>> = ({title, subtitle, children}) => {

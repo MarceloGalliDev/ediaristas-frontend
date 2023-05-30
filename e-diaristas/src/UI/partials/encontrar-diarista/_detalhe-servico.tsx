@@ -1,4 +1,4 @@
-import { Divider, Typography } from '@mui/material';
+import { Button, Container, Divider, Tooltip, Typography } from '@mui/material';
 import ToggleButtonGroup, { ToggleButton } from 'UI/components/inputs/ToggleButtonGroup/ToggleButtonGroup';
 import { AddressForm } from 'UI/components/inputs/UserForm/UserForm';
 import { ServicoInterface } from 'data/@types/ServicoInterface';
@@ -8,10 +8,13 @@ import { ItemsContainer } from './_detalhe-servico.styled';
 import ItemCounter from 'UI/components/inputs/ItemCounter/ItemCounter';
 import TextFieldMask from 'UI/components/inputs/TextFieldMask/TextFieldMask';
 import { FormValues } from 'data/@types/forms/FormValue';
+import TextField  from 'UI/components/inputs/TextField/TextField';
 //import {  } from 'react';
 
 interface DetalheServicoProps {
   servicos?: ServicoInterface[];
+  comodos?: number;
+  podemosAtender?: boolean;
 };
 
 const houseParts = [
@@ -47,8 +50,11 @@ const houseParts = [
   }
 ];
 
-const DetalheServico: React.FC<DetalheServicoProps> = ({ servicos = [] }) => {
+
+
+const DetalheServico: React.FC<DetalheServicoProps> = ({ servicos = [], comodos = 0, podemosAtender }) => {
   //temos que colocar os dados no contexto da página
+  //quando não passamos valor na desestruturação para um boleano, ele é um undefined=false
   const {
     register,
     control,
@@ -151,12 +157,73 @@ const DetalheServico: React.FC<DetalheServicoProps> = ({ servicos = [] }) => {
             />
           )}
         />
-        
+
+        <Controller
+          name={'faxina.hora_termino'}
+          defaultValue={''}
+          control={control}
+          render={({ field: { ref, ...inputProps } }) => (
+            <Tooltip title={"Campo Automático"}>
+              <div>
+                <TextFieldMask
+                  {...inputProps}
+                  inputProps={{readOnly: true, disabled: true}}
+                  inputRef={ref}
+                  mask={'99:99'}
+                  label={'Hora Término'}
+                  error={errors?.faxina?.hora_termino !== undefined}
+                  helperText={errors?.faxina?.hora_termino?.message}
+                  fullWidth
+                />
+              </div>
+            </Tooltip>
+          )}
+        />
+
       </ItemsContainer>
 
       <Divider sx={{ my: 5 }} />
 
+      <Typography sx={{fontWeight: 'bold', pb: 2}}>
+        Observações
+      </Typography>
+
+      <TextField 
+        {...register('faxina.observacoes')}
+        label={'Quer acrescentar algum detalhe?'}
+        required={false}
+        fullWidth
+        multiline
+      />
+
+      <Divider sx={{ my: 5 }} />
+
+      <Typography sx={{ fontWeight: 'bold', pb: 2}}>
+        Qual endereço onde será realizada a limpeza?
+      </Typography>
+
       <AddressForm />
+
+      {!podemosAtender && (
+        <Typography
+          color={'error'}
+          align={'center'}
+          sx={{ pb: 2}}
+        >
+          Infelizmente ainda não atendemos na sua região.
+        </Typography>
+      )}
+
+      <Container sx={{ textAlign: 'right' }}>
+        <Button
+          variant='contained'
+          color='secondary'
+          type='submit'
+          disabled={comodos === 0 || !podemosAtender}
+        >
+          Ir para identificação
+        </Button>
+      </Container>
     </div>
   );
 };
@@ -164,3 +231,4 @@ const DetalheServico: React.FC<DetalheServicoProps> = ({ servicos = [] }) => {
 export default DetalheServico;
 
 //usamos Controller para enviar os dados para o context
+//usamos ToolTip do material ui para que quando passar o mause em cima de um campo, ele mostra uma observação
