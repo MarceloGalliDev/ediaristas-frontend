@@ -12,13 +12,14 @@ import useIsMobile from 'data/hook/useIsMobile';
 import React, { PropsWithChildren } from 'react';
 import { FormProvider } from 'react-hook-form';
 import DetalheServico from './_detalhe-servico';
-import CadastroCliente from './_cadastro-cliente';
+import CadastroCliente, { LoginCliente } from './_cadastro-cliente';
 //import {  } from 'react';
 //import { ComponentName } from './_contratacao.styled'; 
 
 const Contratacao: React.FC<PropsWithChildren> = () => {
   const {
     step,
+    setStep,
     breadcrumbItems,
     serviceForm,
     onServiceFormSubmit,
@@ -72,9 +73,18 @@ const Contratacao: React.FC<PropsWithChildren> = () => {
                 onSubmit={clientForm.handleSubmit(onClientFormSubmit)}
                 hidden={step !== 2 || hasLogin}
               >
-                <CadastroCliente />
+                <CadastroCliente onBack={() => setStep(1)} />
               </form>
             </FormProvider>
+
+            {step === 2 && hasLogin && (
+              <FormProvider {...clientForm}>
+                <form onSubmit={clientForm.handleSubmit(onClientFormSubmit)}>
+                  <LoginCliente onBack={() => setStep(1)} />
+                </form>
+              </FormProvider>
+            )}
+            
           </Paper>
           {!isMobile && step !== 4 && (
             <SideInformation

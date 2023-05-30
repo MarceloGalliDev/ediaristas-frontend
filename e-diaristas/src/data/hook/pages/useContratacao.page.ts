@@ -56,6 +56,7 @@ export default function useContratacao() {
 
   return {
     step,
+    setStep,
     breadcrumbItems,
     serviceForm,
     onServiceFormSubmit,
