@@ -1,4 +1,4 @@
-import { NovaDiariaFormDataInterface } from 'data/@types/FormInterface';
+import { CadastroClienteFormDataInterface, NovaDiariaFormDataInterface } from 'data/@types/FormInterface';
 import { useState } from "react";
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup'
@@ -50,7 +50,7 @@ export default function useContratacao() {
     console.log(data)
   };
 
-  function onClientFormSubmit(data: NovaDiariaFormDataInterface) {
+  function onClientFormSubmit(data: CadastroClienteFormDataInterface) {
     console.log(data)
   }
 

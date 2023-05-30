@@ -12,6 +12,7 @@ import useIsMobile from 'data/hook/useIsMobile';
 import React, { PropsWithChildren } from 'react';
 import { FormProvider } from 'react-hook-form';
 import DetalheServico from './_detalhe-servico';
+import CadastroCliente from './_cadastro-cliente';
 //import {  } from 'react';
 //import { ComponentName } from './_contratacao.styled'; 
 
@@ -71,7 +72,7 @@ const Contratacao: React.FC<PropsWithChildren> = () => {
                 onSubmit={clientForm.handleSubmit(onClientFormSubmit)}
                 hidden={step !== 2 || hasLogin}
               >
-                Cliente form
+                <CadastroCliente />
               </form>
             </FormProvider>
           </Paper>
