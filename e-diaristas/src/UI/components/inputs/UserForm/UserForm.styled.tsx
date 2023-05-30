@@ -109,7 +109,7 @@ export const PageFormContainerStyled = styled('div', {
 })<{fullWidth?: boolean}>`
   font-family: ${({ theme }) => theme.typography.fontFamily};
   display: grid;
-  grid-template-columns: ${({ theme, fullWidth }) => fullWidth ? '1' : 'minmax(652px, 1fr) minmax(150px, 318px)' };
+  grid-template-columns: ${({ fullWidth }) => fullWidth ? '1' : 'minmax(652px, 1fr) minmax(150px, 318px)' };
   gap: ${({ theme }) => theme.spacing(6)};
   align-items: start;
   margin-bottom: ${({ theme }) => theme.spacing(8)};

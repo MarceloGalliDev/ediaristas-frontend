@@ -1,4 +1,4 @@
-import { Button, Paper } from '@mui/material';
+import { Box, Button, Paper, Typography } from '@mui/material';
 import PageTitle from 'UI/components/data-display/PageTitle/PageTitle';
 import SideInformation from 'UI/components/data-display/SideInformation/SideInformation';
 import SafeEnvironment from 'UI/components/feedback/SafeEnvironment/SafeEnvironment';
@@ -13,6 +13,8 @@ import React, { PropsWithChildren } from 'react';
 import { FormProvider } from 'react-hook-form';
 import DetalheServico from './_detalhe-servico';
 import CadastroCliente, { LoginCliente } from './_cadastro-cliente';
+import InformacoesPagamento from './_informacoes-pagamento';
+import Link from 'UI/components/navigation/Links/Links';
 //import {  } from 'react';
 //import { ComponentName } from './_contratacao.styled'; 
 
@@ -28,6 +30,11 @@ const Contratacao: React.FC<PropsWithChildren> = () => {
     setHasLogin,
     clientForm,
     onClientFormSubmit,
+    loginForm,
+    onLoginFormSubmit,
+    loginErro,
+    paymentForm,
+    onPaymentFormSubmit,
   } = useContratacao();
   const isMobile = useIsMobile();
   return (
@@ -37,10 +44,12 @@ const Contratacao: React.FC<PropsWithChildren> = () => {
         selected={breadcrumbItems[step - 1]}
         items={breadcrumbItems}
       />
-      {step == 1 && <PageTitle title="Nos conte um pouco sobre o serviço!" />}
+
+      {step == 1 && <PageTitle title="Nos conte um pouco sobre o serviço" />}
+
       {step == 2 && (
         <PageTitle
-          title="Precisamos conhecer um pouco sobre você!"
+          title="Precisamos conhecer um pouco sobre você"
           subtitle={
             !hasLogin ? (
               <span>
@@ -56,8 +65,11 @@ const Contratacao: React.FC<PropsWithChildren> = () => {
           }
         />
       )}
+
+      {step == 3 && <PageTitle title="Informe os dados para pagamento" subtitle={'Será feita uma reserva, mas o valor só será descontado quando você confirmar a presença'}/>}
+
       <UserFormContainer>
-        <PageFormContainer>
+        <PageFormContainer fullWidth={step === 4}>
           <Paper>
             <FormProvider {...serviceForm}>
               <form
@@ -78,14 +90,60 @@ const Contratacao: React.FC<PropsWithChildren> = () => {
             </FormProvider>
 
             {step === 2 && hasLogin && (
-              <FormProvider {...clientForm}>
-                <form onSubmit={clientForm.handleSubmit(onClientFormSubmit)}>
+              <FormProvider {...loginForm}>
+                <form onSubmit={loginForm.handleSubmit(onLoginFormSubmit)}>
+                  {loginErro && (
+                    <Typography color={'error'} align={'center'} sx={{ mb: 2 }}>
+                      {loginErro}
+                    </Typography>
+                  )}
                   <LoginCliente onBack={() => setStep(1)} />
                 </form>
               </FormProvider>
             )}
-            
+
+            {step === 3 && (
+              <FormProvider {...paymentForm}>
+                <form onSubmit={paymentForm.handleSubmit(onPaymentFormSubmit)}>
+                  <InformacoesPagamento />
+                </form>
+              </FormProvider>
+            )}
+            {step === 4 && (
+              <Box sx={{ textAlign: 'center' }}>
+                <Typography sx={{ fontSize: '82px' }} color={'secondary'}>
+                  <i className="twf-check-circle" />
+                </Typography>
+
+                <Typography
+                  sx={{ fontSize: '22px', pb: 3 }}
+                  color={'secondary'}
+                >
+                  Pagamento realizado com sucesso!
+                </Typography>
+
+                <Typography
+                  sx={{ mb: 3, maxWidth: '410px', mx: 'auto' }}
+                  color={'textsecondary'}
+                >
+                  Sua diária foi paga com sucesso! Já estamos procurando o(a)
+                  melhor profissional para atender sua residência. Caso
+                  nenhum(a) profissional seja encontrado(a), devolvemos seu
+                  dinheiro automaticamente 24 horas antes da data agendada. Você
+                  também pode cancelar a sua diária sem nenhuma multa até 24
+                  horas antes da hora do agendamento.
+                </Typography>
+                <Link
+                  href="/diarias"
+                  Component={Button}
+                  mui={{ color: 'secondary', variant: 'contained' }}
+                >
+                  Ir para minhas diárias
+                </Link>
+              </Box>
+            )}
           </Paper>
+
           {!isMobile && step !== 4 && (
             <SideInformation
               title="Detalhes"

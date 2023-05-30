@@ -1,4 +1,4 @@
-import { CadastroClienteFormDataInterface, NovaDiariaFormDataInterface } from 'data/@types/FormInterface';
+import { CadastroClienteFormDataInterface, CredenciaisInterface, LoginFormDataInterface, NovaDiariaFormDataInterface, PagamentoFormDataInterface } from 'data/@types/FormInterface';
 import { useState } from "react";
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup'
@@ -7,8 +7,9 @@ import { ServicoInterface } from "data/@types/ServicoInterface";
 
 
 export default function useContratacao() {
-  const [ step, setStep ] = useState(2);
+  const [ step, setStep ] = useState(3);
   const [ hasLogin, setHasLogin ] = useState(false);
+  const [loginErro, setLoginErro ] = useState(''); 
   const breadcrumbItems = ['Detalhes da diária', 'Identificação', 'Pagamento'];
 
   const serviceForm = useForm<NovaDiariaFormDataInterface>({
@@ -21,9 +22,17 @@ export default function useContratacao() {
     resolver: yupResolver(
       FormSchemaService.userData().concat(FormSchemaService.newContact())
     )
-  }),
+  });
 
-  servicos: ServicoInterface[] = [
+  const loginForm = useForm<LoginFormDataInterface<CredenciaisInterface>>({
+    resolver: yupResolver(FormSchemaService.login())
+  });
+
+  const paymentForm = useForm<PagamentoFormDataInterface>({
+    resolver: yupResolver(FormSchemaService.payment())
+  });
+
+  const servicos: ServicoInterface[] = [
     {
       id: 0,
       nome: 'Limpeza comum',
@@ -43,7 +52,7 @@ export default function useContratacao() {
       valor_quarto: 20,
       valor_quintal: 20,
       valor_sala: 20,
-    }
+    },
   ];
   
   function onServiceFormSubmit(data: NovaDiariaFormDataInterface) {
@@ -52,18 +61,31 @@ export default function useContratacao() {
 
   function onClientFormSubmit(data: CadastroClienteFormDataInterface) {
     console.log(data)
-  }
+  };
+
+  function onLoginFormSubmit(data: LoginFormDataInterface<CredenciaisInterface>) {
+    console.log(data)
+  };
+
+  function onPaymentFormSubmit(data: PagamentoFormDataInterface ) {
+    console.log(data);
+  };
 
   return {
     step,
     setStep,
     breadcrumbItems,
+    servicos,
     serviceForm,
     onServiceFormSubmit,
-    servicos,
     hasLogin,
     setHasLogin,
     clientForm,
     onClientFormSubmit,
+    loginForm,
+    loginErro,
+    onLoginFormSubmit,
+    paymentForm,
+    onPaymentFormSubmit,
   };
 }
