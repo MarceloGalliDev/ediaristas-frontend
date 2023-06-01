@@ -53,16 +53,18 @@ export function useExternalServicesReducer(): ExternalServiceReducerInterface {
 
   //aqui usamos a tipagem para obter o retorno dos dados de acordo com a interface
   useEffect(() => {
-    ApiService.get<{links: ApiLinksInterface[]}>('/api').then((response) => {
+    ApiService.get<{ links: ApiLinksInterface[] }>('/api').then(({ data }) => {
       dispatch({
         type: 'UPDATE',
-        payload: response.data.links,
-      })
-    })
-  }, [])
+        payload: data.links,
+      });
+    });
+  }, []);
 
   return {
     externalServicesState: state,
     externalServicesDispatch: dispatch,
   }
 }
+
+//vamos colocar dentro do contexto do react

@@ -10,13 +10,14 @@ import CssBaseline from "@mui/material/CssBaseline";
 import { CacheProvider, EmotionCache } from "@emotion/react";
 import createEmotionCache from "../data/services/createEmotionCache";
 import { AppContainer } from "@styles/pages/AppContainer.styled";
+import { MainProvider } from "data/contexts/MainContext";
 
 const clientSideEmotionCache = createEmotionCache();
 export interface MyAppProps extends AppProps {
   emotionCache?: EmotionCache;
 };
 
-export default function App(props: MyAppProps) {
+function App(props: MyAppProps) {
   const { Component, emotionCache = clientSideEmotionCache, pageProps } = props;
   return (
     <CacheProvider value={emotionCache}>
@@ -37,3 +38,14 @@ export default function App(props: MyAppProps) {
     </CacheProvider>
   );
 };
+
+//quando for chamado o App, ele automaticamente vai chamar essa constante e executara a função App dentro do contexto
+const AppProviderContainer:React.FC<AppProps> = (props) => {
+  return(
+    <MainProvider>
+      <App {...props}/>
+    </MainProvider>
+  )
+};
+
+export default AppProviderContainer;
