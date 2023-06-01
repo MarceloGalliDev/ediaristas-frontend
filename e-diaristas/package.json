@@ -30,6 +30,7 @@
     "check-password-strength": "^2.0.7",
     "eslint": "8.36.0",
     "eslint-config-next": "13.2.4",
+    "immer": "^10.0.2",
     "jest-environment-jsdom": "^29.5.0",
     "mime-types": "^2.1.35",
     "next": "13.2.4",

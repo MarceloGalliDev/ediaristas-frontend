@@ -192,3 +192,13 @@
 - componente de UserForm
 
 # 19 - Formulário de contratação
+
+# 20 - Criando contexto
+  - criamos a pasta
+  - criamos a função provider
+
+  - criando REDUCER
+    - instalando IMMER
+  
+  - userReducer do React
+    - é bem parecido com useState, so que ele permite alterar campos especificos
