@@ -1,15 +1,24 @@
-import { CadastroClienteFormDataInterface, CredenciaisInterface, LoginFormDataInterface, NovaDiariaFormDataInterface, PagamentoFormDataInterface } from 'data/@types/FormInterface';
-import { useState } from "react";
+import { 
+  CadastroClienteFormDataInterface, 
+  CredenciaisInterface, 
+  LoginFormDataInterface, 
+  NovaDiariaFormDataInterface, 
+  PagamentoFormDataInterface 
+} from 'data/@types/FormInterface';
+import { useMemo, useState } from "react";
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup'
 import { FormSchemaService } from "data/services/FormSchemaService";
 import { ServicoInterface } from "data/@types/ServicoInterface";
+import useSwr from 'swr'
+import useApi from '../useApi.hook';
+import { DiariaInterface } from 'data/@types/DiariaInterface';
 
 
 export default function useContratacao() {
-  const [ step, setStep ] = useState(3);
+  const [ step, setStep ] = useState(1);
   const [ hasLogin, setHasLogin ] = useState(false);
-  const [loginErro, setLoginErro ] = useState(''); 
+  const [ loginErro, setLoginErro ] = useState(''); 
   const breadcrumbItems = ['Detalhes da diária', 'Identificação', 'Pagamento'];
 
   const serviceForm = useForm<NovaDiariaFormDataInterface>({
@@ -32,29 +41,33 @@ export default function useContratacao() {
     resolver: yupResolver(FormSchemaService.payment())
   });
 
-  const servicos: ServicoInterface[] = [
-    {
-      id: 0,
-      nome: 'Limpeza comum',
-      icone: 'twf-cleaning-1',
-      horas_banheiro: 1,
-      horas_cozinha: 1,
-      horas_outros: 1,
-      horas_quarto: 1,
-      horas_quintal: 1,
-      horas_sala: 1,
-      porcentagem_comissao: 10,
-      qtd_horas: 2,
-      valor_banheiro: 20,
-      valor_cozinha: 20,
-      valor_minimo: 20,
-      valor_outros: 20,
-      valor_quarto: 20,
-      valor_quintal: 20,
-      valor_sala: 20,
-    },
-  ];
-  
+  const servicos = useApi<ServicoInterface[]>('/api/servicos').data;
+  const dadosFaxina = serviceForm.watch('faxina');//estamos observando o serviceForm na mudança do estado dde faxina
+  const tipoLimpeza = useMemo<ServicoInterface>(() => {
+    if(servicos && dadosFaxina?.servico){
+      const selectedServico = servicos.find(((servico) => servico.id === dadosFaxina.servico))//find() é usado para retornar um objeto ou elemento que seja igual ao outro
+
+      if(selectedServico) {
+        return selectedServico;
+      }
+    }
+    return {} as ServicoInterface;
+
+  }, [servicos, dadosFaxina?.servico]);
+  const { totalTime } = useMemo<{totalTime: number}>(() => {
+    return { totalTime: calcularTempoServico(dadosFaxina, tipoLimpeza) }
+  },[
+    tipoLimpeza, 
+    dadosFaxina, 
+    dadosFaxina?.quantidade_banheiros,
+    dadosFaxina?.quantidade_cozinhas,
+    dadosFaxina?.quantidade_outros,
+    dadosFaxina?.quantidade_quartos,
+    dadosFaxina?.quantidade_quintais,
+    dadosFaxina?.quantidade_salas,
+  ])//vamos executar quando tivermos o tipo de limpeza alterado, o ? é pelo fato que pode ser undefined os campos apresentados acima
+  //função que calcula o serviço
+
   function onServiceFormSubmit(data: NovaDiariaFormDataInterface) {
     console.log(data)
   };
@@ -70,6 +83,22 @@ export default function useContratacao() {
   function onPaymentFormSubmit(data: PagamentoFormDataInterface ) {
     console.log(data);
   };
+
+  function calcularTempoServico(
+    dadosFaxina: DiariaInterface, 
+    tipoLimpeza: ServicoInterface
+  ): number {
+    let total = 0
+    if(dadosFaxina && tipoLimpeza){
+      total += tipoLimpeza.horas_banheiro * dadosFaxina.quantidade_banheiros;
+      total += tipoLimpeza.horas_cozinha * dadosFaxina.quantidade_cozinhas;
+      total += tipoLimpeza.horas_outros * dadosFaxina.quantidade_outros;
+      total += tipoLimpeza.horas_quarto * dadosFaxina.quantidade_quartos;
+      total += tipoLimpeza.horas_quintal * dadosFaxina.quantidade_quintais;
+      total += tipoLimpeza.horas_sala * dadosFaxina.quantidade_salas;
+    }
+    return total;
+  }
 
   return {
     step,

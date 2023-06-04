@@ -1,4 +1,4 @@
-import { Box, Button, Paper, Typography } from '@mui/material';
+import { Box, Button, CircularProgress, Container, Paper, Typography } from '@mui/material';
 import PageTitle from 'UI/components/data-display/PageTitle/PageTitle';
 import SideInformation from 'UI/components/data-display/SideInformation/SideInformation';
 import SafeEnvironment from 'UI/components/feedback/SafeEnvironment/SafeEnvironment';
@@ -37,6 +37,15 @@ const Contratacao: React.FC<PropsWithChildren> = () => {
     onPaymentFormSubmit,
   } = useContratacao();
   const isMobile = useIsMobile();
+
+  if(!servicos || servicos.length < 1) {
+    return (
+      <Container sx={{textAlign: "center", my: 10 }}>
+        <CircularProgress />
+      </Container>
+    )
+  };
+
   return (
     <div>
       {!isMobile && <SafeEnvironment />}
@@ -70,7 +79,7 @@ const Contratacao: React.FC<PropsWithChildren> = () => {
 
       <UserFormContainer>
         <PageFormContainer fullWidth={step === 4}>
-          <Paper>
+          <Paper sx={{p: 4}}>
             <FormProvider {...serviceForm}>
               <form
                 onSubmit={serviceForm.handleSubmit(onServiceFormSubmit)}

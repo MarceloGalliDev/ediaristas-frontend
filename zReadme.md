@@ -202,3 +202,9 @@
   
   - userReducer do React
     - é bem parecido com useState, so que ele permite alterar campos especificos
+
+# 21 - Instalando SWR
+  - Melhora a experiencia do usuario
+  - Uma função que passa argumentos
+    - Como por exemplo uma requisição passando argumentos, no useSWR({'URI'}, {'REQUISIÇÃO'})
+  - Ele melhorar o carregamento mantendo em cache as requisições, tornando-os mais rápido as solicitações do usuario
