@@ -101,7 +101,7 @@ export const FormSchemaService = {
   detalheServico() {
     return yup.object().shape({
       faxina: yup.object().shape({
-        data_atendiment: yup
+        data_atendimento: yup
           .date()
           .transform(DateService.transformDate)
           .typeError('Digite uma data válida')

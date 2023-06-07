@@ -63,7 +63,7 @@ export const AddressForm = () => {
             disablePortal
             options={opcoesCidades}
             style={{ gridArea: 'cidade' }}
-            disabled={addressState === ''}
+            disabled={addressState === '' }
             loading={opcoesCidades.length === 0}
             loadingText={'Carregando cidades...'}
             noOptionsText={'Nenhuma cidade com esse nome'}

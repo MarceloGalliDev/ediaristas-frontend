@@ -5,7 +5,7 @@ import {
   NovaDiariaFormDataInterface, 
   PagamentoFormDataInterface 
 } from 'data/@types/FormInterface';
-import { useMemo, useState } from "react";
+import { useContext, useEffect, useMemo, useState } from "react";
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup'
 import { FormSchemaService } from "data/services/FormSchemaService";
@@ -13,6 +13,11 @@ import { ServicoInterface } from "data/@types/ServicoInterface";
 import useSwr from 'swr'
 import useApi from '../useApi.hook';
 import { DiariaInterface } from 'data/@types/DiariaInterface';
+import { ValidationService } from 'data/services/ValidationService';
+import { DateService } from 'data/services/DateService';
+import { houseParts } from '@partials/encontrar-diarista/_detalhe-servico';
+import { ExternalServiceContext } from 'data/contexts/ExternalServiceContext';
+import { ApiService, linksResolver } from 'data/services/ApiService';
 
 
 export default function useContratacao() {
@@ -54,19 +59,64 @@ export default function useContratacao() {
     return {} as ServicoInterface;
 
   }, [servicos, dadosFaxina?.servico]);
-  const { totalTime } = useMemo<{totalTime: number}>(() => {
-    return { totalTime: calcularTempoServico(dadosFaxina, tipoLimpeza) }
-  },[
-    tipoLimpeza, 
-    dadosFaxina, 
+  const { totalTime, tamanhoCasa, totalPrice } = useMemo<{
+    totalTime: number;
+    tamanhoCasa: string[];
+    totalPrice: number;
+  }>(() => {
+    return {
+      totalTime: calcularTempoServico(dadosFaxina, tipoLimpeza),
+      tamanhoCasa: listarComodos(dadosFaxina),
+      totalPrice: calcularPreco(dadosFaxina, tipoLimpeza),
+    };
+  }, [
+    tipoLimpeza,
+    dadosFaxina,
     dadosFaxina?.quantidade_banheiros,
     dadosFaxina?.quantidade_cozinhas,
     dadosFaxina?.quantidade_outros,
     dadosFaxina?.quantidade_quartos,
     dadosFaxina?.quantidade_quintais,
     dadosFaxina?.quantidade_salas,
-  ])//vamos executar quando tivermos o tipo de limpeza alterado, o ? é pelo fato que pode ser undefined os campos apresentados acima
+  ]),//vamos executar quando tivermos o tipo de limpeza alterado, o ? é pelo fato que pode ser undefined os campos apresentados acima
   //função que calcula o serviço
+
+  cepFaxina = serviceForm.watch('endereco.cep'),
+  [podemosAtender, setPodemosAtender] = useState(false),
+  { externalServicesState } = useContext(ExternalServiceContext);
+
+  useEffect(() => {
+    //verificar_disponibilidade_atendimento, vindo lá da API
+    const cep = (cepFaxina ?? '').replace(/\D/g, '')
+    if (ValidationService.cep(cep)) {
+      const linkDisponibilidade = linksResolver(
+        externalServicesState.externalService,
+        'verificar_disponibilidade_atendimento'
+      );
+
+      if (linkDisponibilidade) {
+        ApiService.request({
+          url: linkDisponibilidade.uri,
+          method: linkDisponibilidade.type,
+          params: { cep },
+        })
+          .then((response) => setPodemosAtender(true)) //esperamos uma resposta da api
+          .catch((_erro) => setPodemosAtender(false)); //retorno um catch em caso de erro
+      }
+    } else {
+      setPodemosAtender(false);
+    }
+  }, [cepFaxina, externalServicesState.externalService]);
+
+  useEffect(() => {
+    if(dadosFaxina && ValidationService.hora(dadosFaxina.hora_inicio) && totalTime >= 0 ) {
+      serviceForm.setValue('faxina.hora_inicio', dadosFaxina?.hora_inicio, {shouldValidate: true});//shouldValidate serve para validar os campos do formulário
+      serviceForm.setValue('faxina.data_atendimento', dadosFaxina?.data_atendimento, {shouldValidate: true});//shouldValidate serve para validar os campos do formulário
+      serviceForm.setValue('faxina.hora_termino', DateService.addHours(dadosFaxina?.hora_inicio as string, totalTime), {shouldValidate: true});//shouldValidate serve para validar os campos do formulário
+    } else {
+      serviceForm.setValue('faxina.hora_termino', '') //aqui usamos o setValue para fazer a alteração no campo de faxina.hora_termino
+    }
+  }, [totalTime, dadosFaxina?.hora_inicio, dadosFaxina?.data_atendimento, dadosFaxina?.hora_termino])
 
   function onServiceFormSubmit(data: NovaDiariaFormDataInterface) {
     console.log(data)
@@ -98,6 +148,38 @@ export default function useContratacao() {
       total += tipoLimpeza.horas_sala * dadosFaxina.quantidade_salas;
     }
     return total;
+  };
+
+  function calcularPreco(
+    dadosFaxina: DiariaInterface, 
+    tipoLimpeza: ServicoInterface
+  ): number {
+    let total = 0
+    if(dadosFaxina && tipoLimpeza){
+      total += tipoLimpeza.valor_banheiro * dadosFaxina.quantidade_banheiros;
+      total += tipoLimpeza.valor_cozinha * dadosFaxina.quantidade_cozinhas;
+      total += tipoLimpeza.valor_outros * dadosFaxina.quantidade_outros;
+      total += tipoLimpeza.valor_quarto * dadosFaxina.quantidade_quartos;
+      total += tipoLimpeza.valor_quintal * dadosFaxina.quantidade_quintais;
+      total += tipoLimpeza.valor_sala * dadosFaxina.quantidade_salas;
+    }
+    return Math.max(total, tipoLimpeza.valor_minimo);//valor minimo vem da api, calcula para testar o valor minimo
+  };
+
+  function listarComodos(dadosFaxina: DiariaInterface): string[] {
+    const comodos: string[] = [];
+
+    if(dadosFaxina){
+      houseParts.forEach((housePart) => {
+        const total = dadosFaxina[housePart.name as keyof DiariaInterface] as number;
+        if(total > 0) {
+          const nome = total > 1 ? housePart.plural : housePart.singular;
+          comodos.push(`${total} ${nome}`);
+        }
+      });
+    }//vamos usar o forEach, para criar a quantidade total de serviçoes, keyof DiariaInterface é para identificar o parametro e colocar como uma key do forEach
+
+    return comodos;
   }
 
   return {
@@ -116,5 +198,9 @@ export default function useContratacao() {
     onLoginFormSubmit,
     paymentForm,
     onPaymentFormSubmit,
+    tamanhoCasa,
+    tipoLimpeza,
+    totalPrice,
+    podemosAtender,
   };
 }

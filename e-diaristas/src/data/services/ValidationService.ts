@@ -51,7 +51,7 @@ export const ValidationService = {
     const diferenca = ((((dataHora - agora) / 1000) / 60) / 60);
     const minHora = 48
 
-    return diferenca> minHora;
+    return diferenca > minHora;
   },
 
   hora(horario = ''): boolean {

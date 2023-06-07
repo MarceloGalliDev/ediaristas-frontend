@@ -1,5 +1,9 @@
 //Arquivo para manusear formatação de texto
 
+const CurrencyFormatter = new Intl.NumberFormat('pt-BR', {
+  style: 'currency',
+  currency: 'BRL',
+})
 
 export const TextFormatService = {
   reverseDate(data: string): string {
@@ -14,6 +18,23 @@ export const TextFormatService = {
 
     return data.split('-').reverse().join('/')
   },
+  currency(price = 0): string {
+    if(isNaN(price)){
+      price = 0
+    }
+    return CurrencyFormatter.format(price);
+  },
+  getNumbersFromText(text = ''):string {
+    return text.replace(/\D/g, '');
+  },
+  dateToString(date: Date, withTime = false):string {
+    const time = date.toISOString();//2022/04/01T01:01:01:Z
+
+    if(withTime){
+      return time.substring(0,19);
+    };
+    return time.substring(0, 10)//substring é para pegar somente uma parte da string, do 0 a 10 caracteres
+  }
 };
 //aqui recebemos uma data com tipagem de string que retorna uma string
 //função include() é para verificar se tem o caracter
