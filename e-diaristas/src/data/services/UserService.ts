@@ -3,6 +3,9 @@ import { UserInterface, UserType } from "data/@types/UserInterface";
 import { ApiService } from "./ApiService";
 import { TextFormatService } from "./TextFormatService";
 import { ObjectService } from "./ObjectService";
+import { UseFormReturn } from "react-hook-form";
+import { CadastroUserInterface } from "data/@types/FormInterface";
+import axios from "axios";
 
 export const UserService = {
   async cadastrar(
@@ -35,5 +38,27 @@ export const UserService = {
     });
 
     return response.data;
+  },
+
+  //aqui se acaso a requisição der erro, apresentaremos esse erro
+  handleNewUserError(error: unknown, form: UseFormReturn<CadastroUserInterface>) {
+    if(axios.isAxiosError(error)) {
+      const errorList = error.response?.data as UserInterface | undefined
+
+      if(errorList){
+        if(errorList.cpf){
+          form.setError('usuario.cpf', {
+            type: 'cadastrado',
+            message: "CPF já cadastrado",
+          })
+        }
+        if(errorList.email){
+          form.setError('usuario.email', {
+            type: 'cadastrado',
+            message: "E-mail já cadastrado",
+          })
+        }
+      }
+    }
   }
 };

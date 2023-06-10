@@ -3,8 +3,8 @@ import { UserReducerInterface, initialState, useUserReducer } from 'data/reduces
 import React, { PropsWithChildren, createContext } from 'react';
 
 const initialValue: UserReducerInterface = {
-  useDispatch: () => {},
-  useState: initialState,
+  userDispatch: () => {},
+  userState: initialState,
 }
 
 //criando contexto, createContext() é sempre inicializado com um valor default

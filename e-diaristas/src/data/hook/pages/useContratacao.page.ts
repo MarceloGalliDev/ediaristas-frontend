@@ -10,14 +10,16 @@ import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup'
 import { FormSchemaService } from "data/services/FormSchemaService";
 import { ServicoInterface } from "data/@types/ServicoInterface";
-import useSwr from 'swr'
-import useApi from '../useApi.hook';
 import { DiariaInterface } from 'data/@types/DiariaInterface';
 import { ValidationService } from 'data/services/ValidationService';
 import { DateService } from 'data/services/DateService';
 import { houseParts } from '@partials/encontrar-diarista/_detalhe-servico';
 import { ExternalServiceContext } from 'data/contexts/ExternalServiceContext';
-import { ApiService, linksResolver } from 'data/services/ApiService';
+import { ApiServiceHateoas } from 'data/services/ApiService';
+import useApiHateoas from '../useApi.hook';
+import { UserContext } from 'data/contexts/UserContext';
+import { UserInterface } from 'data/@types/UserInterface';
+import { TextFormatService } from 'data/services/TextFormatService';
 
 
 export default function useContratacao() {
@@ -46,8 +48,12 @@ export default function useContratacao() {
     resolver: yupResolver(FormSchemaService.payment())
   });
 
-  const servicos = useApi<ServicoInterface[]>('/api/servicos').data;
+  const { externalServicesState } = useContext(ExternalServiceContext);
+
+  const servicos = useApiHateoas<ServicoInterface[]>(externalServicesState.externalService, 'listar_servicos').data;
+
   const dadosFaxina = serviceForm.watch('faxina');//estamos observando o serviceForm na mudança do estado dde faxina
+
   const tipoLimpeza = useMemo<ServicoInterface>(() => {
     if(servicos && dadosFaxina?.servico){
       const selectedServico = servicos.find(((servico) => servico.id === dadosFaxina.servico))//find() é usado para retornar um objeto ou elemento que seja igual ao outro
@@ -83,26 +89,26 @@ export default function useContratacao() {
 
   cepFaxina = serviceForm.watch('endereco.cep'),
   [podemosAtender, setPodemosAtender] = useState(false),
-  { externalServicesState } = useContext(ExternalServiceContext);
+  { userState, userDispatch } = useContext(UserContext),
+  [novaDiaria, setNovaDiaria] = useState({} as DiariaInterface);
 
   useEffect(() => {
     //verificar_disponibilidade_atendimento, vindo lá da API
+    //consultamos o hateos la do back-end
     const cep = (cepFaxina ?? '').replace(/\D/g, '')
     if (ValidationService.cep(cep)) {
-      const linkDisponibilidade = linksResolver(
+      ApiServiceHateoas(
         externalServicesState.externalService,
-        'verificar_disponibilidade_atendimento'
-      );
-
-      if (linkDisponibilidade) {
-        ApiService.request({
-          url: linkDisponibilidade.uri,
-          method: linkDisponibilidade.type,
-          params: { cep },
-        })
-          .then((response) => setPodemosAtender(true)) //esperamos uma resposta da api
-          .catch((_erro) => setPodemosAtender(false)); //retorno um catch em caso de erro
-      }
+        'verificar_disponibilidade_atendimento',
+        (request) => {
+          request<{ disponibilidade: boolean }>({ params: { cep }})
+            .then(({ data }) => {
+              setPodemosAtender(data.disponibilidade);
+            }).catch((_err) => {
+              setPodemosAtender(false);
+            })
+        }
+      )
     } else {
       setPodemosAtender(false);
     }
@@ -119,7 +125,12 @@ export default function useContratacao() {
   }, [totalTime, dadosFaxina?.hora_inicio, dadosFaxina?.data_atendimento, dadosFaxina?.hora_termino])
 
   function onServiceFormSubmit(data: NovaDiariaFormDataInterface) {
-    console.log(data)
+    if (userState.user.nome_completo){
+      criarDiaria(userState.user)
+    } else {
+      //aqui vamos para o segundo formulário
+      setStep(2);
+    }
   };
 
   function onClientFormSubmit(data: CadastroClienteFormDataInterface) {
@@ -180,6 +191,38 @@ export default function useContratacao() {
     }//vamos usar o forEach, para criar a quantidade total de serviçoes, keyof DiariaInterface é para identificar o parametro e colocar como uma key do forEach
 
     return comodos;
+  };
+
+  async function criarDiaria(user: UserInterface) {
+    //vamos verificar se temos usuario logado
+    if (user.nome_completo) {
+      //getValues nos traz os dados do formulário
+      const { endereco, faxina } = serviceForm.getValues();
+      //os links do hateoas vem nos dados do usuário
+      await ApiServiceHateoas(
+        user.links, 
+        'cadastrar_diaria', 
+        async (request) => {
+        const { data: novaDiaria } = await request<DiariaInterface>({
+          data: {
+            ...faxina,
+            ...endereco,
+            cep: TextFormatService.getNumbersFromText(endereco.cep),
+            preco: totalPrice,
+            tempo_atendimento: totalTime,
+            data_atendimento: TextFormatService.reverseDate(
+              faxina.data_atendimento + 'T' + faxina.hora_inicio
+            ),
+          },
+        });
+
+        if (novaDiaria) {
+          setStep(3);
+          //estou salvando os dados da nova diária
+          setNovaDiaria(novaDiaria);
+        }
+      });
+    }
   }
 
   return {
