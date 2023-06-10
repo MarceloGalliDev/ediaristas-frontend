@@ -7,28 +7,24 @@ import { LoginButtonsContainer } from './_cadastro-cliente.styled';
 //import {  } from 'react';
 //import { ComponentName } from './_cadastro-cliente.styled'; 
 
-const CadastroCliente: React.FC<{onBack: () => void}> = ({onBack}) => {
+const CadastroCliente: React.FC<{ onBack: () => void }> = ({ onBack }) => {
   return (
     <div>
-      <Typography sx={{ fontWeight: 'bold', pb: 2 }}>Dados Pessoais</Typography>
-
-      <UserDataForm />
-
+      <Typography sx={{ fontWeight: 'bold', pb: 2 }}>Dados pessoais</Typography>
+      <UserDataForm cadastro={true} />
       <Divider sx={{ mb: 5 }} />
 
       <Typography sx={{ fontWeight: 'bold', pb: 2 }}>
-        Hora da self! Envie uma self segurando o documento.
+        Hora da self! Envie uma self segurando o documento
       </Typography>
       <PictureForm />
-
       <Typography sx={{ pb: 5, pt: 1 }} variant={'body2'}>
-        Seus documentos estão sob sigilo, fique tranquilo(a).
+        Essa foto não será vista por ninguém
       </Typography>
-
       <Divider sx={{ mb: 5 }} />
 
       <Typography sx={{ fontWeight: 'bold', pb: 2 }}>
-        Dados de acesso.
+        Dados de acesso
       </Typography>
       <NewContactForm />
 
@@ -37,7 +33,7 @@ const CadastroCliente: React.FC<{onBack: () => void}> = ({onBack}) => {
           variant="outlined"
           color="primary"
           type="button"
-          onClick={() => onBack()}
+          onClick={onBack}
         >
           Voltar para detalhes da diária
         </Button>
@@ -58,7 +54,7 @@ export const LoginCliente: React.FC<{ onBack: () => void }> = ({ onBack }) => {
           variant="outlined"
           color="primary"
           type="button"
-          onClick={() => onBack()}
+          onClick={onBack}
         >
           Voltar para detalhes da diária
         </Button>
@@ -68,7 +64,7 @@ export const LoginCliente: React.FC<{ onBack: () => void }> = ({ onBack }) => {
       </LoginButtonsContainer>
     </div>
   );
-}
+};
 
 export default CadastroCliente;
 

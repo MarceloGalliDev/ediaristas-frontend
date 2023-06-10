@@ -61,7 +61,7 @@ export const UserDataForm:React.FC<UserDataFormProps> = ({ cadastro = false }) =
         }}) => {
           return (
             <TextFieldMask 
-              mask='99.999.999-99'  
+              mask='999.999.999-99'  
               {...inputProps}
               label={'CPF'}
               style={{gridArea: 'cpf'}}

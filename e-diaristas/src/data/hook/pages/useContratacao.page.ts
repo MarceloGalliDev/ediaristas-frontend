@@ -73,7 +73,7 @@ export default function useContratacao() {
 
   const tipoLimpeza = useMemo<ServicoInterface>(() => {
     if(servicos && dadosFaxina?.servico){
-      const selectedServico = servicos.find(((servico) => servico.id === dadosFaxina.servico))//find() é usado para retornar um objeto ou elemento que seja igual ao outro
+      const selectedServico = servicos.find((servico) => servico.id === dadosFaxina.servico)//find() é usado para retornar um objeto ou elemento que seja igual ao outro
 
       if(selectedServico) {
         return selectedServico;
@@ -352,8 +352,8 @@ export default function useContratacao() {
             preco: totalPrice,
             tempo_atendimento: totalTime,
             data_atendimento: TextFormatService.reverseDate(
-              faxina.data_atendimento + 'T' + faxina.hora_inicio
-            ),
+              faxina.data_atendimento as string
+            ) + 'T' + faxina.hora_inicio,
           },
         });
 
