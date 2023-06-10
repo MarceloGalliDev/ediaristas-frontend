@@ -9,7 +9,7 @@ import {
 import BreadCrumb from 'UI/components/navigation/BreadCrumb/BreadCrumb';
 import useContratacao from 'data/hook/pages/useContratacao.page';
 import useIsMobile from 'data/hook/useIsMobile';
-import React, { PropsWithChildren } from 'react';
+import React, { PropsWithChildren, useEffect } from 'react';
 import { FormProvider } from 'react-hook-form';
 import DetalheServico from './_detalhe-servico';
 import CadastroCliente, { LoginCliente } from './_cadastro-cliente';
@@ -17,6 +17,7 @@ import InformacoesPagamento from './_informacoes-pagamento';
 import Link from 'UI/components/navigation/Links/Links';
 import { TextFormatService } from 'data/services/TextFormatService';
 import DataList from 'UI/components/data-display/DataList/DataList';
+import { BrowserService } from 'data/services/BrowserService';
 //import {  } from 'react';
 //import { ComponentName } from './_contratacao.styled'; 
 
@@ -43,7 +44,13 @@ const Contratacao: React.FC<PropsWithChildren> = () => {
     podemosAtender,
   } = useContratacao();
   const isMobile = useIsMobile(),
-  dataAtendimento = serviceForm.watch('faxina.data_atendimento')
+  dataAtendimento = serviceForm.watch('faxina.data_atendimento');
+
+
+  useEffect(() => {
+    BrowserService.scrollToTop();
+  }, [step])
+
 
   if(!servicos || servicos.length < 1) {
     return (

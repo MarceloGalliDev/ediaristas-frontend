@@ -12,7 +12,15 @@ import TextFieldMask from 'UI/components/inputs/TextFieldMask/TextFieldMask';
 import UserInformation from 'UI/components/data-display/UserInformation/UserInformation';
 import useVerificarProfissionais from 'data/hook/pages/useVerificarProfissionais.page';
 
-const VerificarProfissionais: React.FC<PropsWithChildren> = () => {
+
+interface VerificarProfissionaisProps {
+  onContratarProfissionais: () => void;
+}
+
+
+const VerificarProfissionais: React.FC<VerificarProfissionaisProps> = ({
+  onContratarProfissionais,
+}) => {
   const {
     cep,
     setCep,
@@ -35,29 +43,30 @@ const VerificarProfissionais: React.FC<PropsWithChildren> = () => {
       <Container sx={{ mb: 10 }}>
         <FormElementsContainer>
           <TextFieldMask
-            mask={"99999-999"}
-            label={"Digite seu CEP"}
+            mask={'99999-999'}
+            label={'Digite seu CEP'}
             fullWidth
             value={cep}
             onChange={(event) => setCep(event.target.value)}
           />
 
-          {error && (<Typography color={"error"}>CEP não encontrado!</Typography>)}
+          {error && (
+            <Typography color={'error'}>CEP não encontrado!</Typography>
+          )}
 
           <Button
-            variant={"contained"}
-            color={"secondary"}
-            sx={{ width: "220px" }}
+            variant={'contained'}
+            color={'secondary'}
+            sx={{ width: '220px' }}
             disabled={!cepValido || carregando}
             onClick={() => buscarProfissionais(cep)}
           >
-            {carregando ? <CircularProgress size={20}/> : "Buscar"}
+            {carregando ? <CircularProgress size={20} /> : 'Buscar'}
           </Button>
-
         </FormElementsContainer>
 
-        { buscaFeita && (
-          diaristas.length > 0 ? (
+        {buscaFeita &&
+          (diaristas.length > 0 ? (
             <ProfissionaisPaper>
               <ProfissionaisContainer>
                 {diaristas.map((diarista, index) => {
@@ -69,27 +78,38 @@ const VerificarProfissionais: React.FC<PropsWithChildren> = () => {
                       rating={diarista.reputacao ?? 0}
                       description={diarista.cidade}
                     />
-                  )
+                  );
                 })}
               </ProfissionaisContainer>
 
-              <Container sx={{ textAlign: "center" }}>
-                {diaristasRestantes > 0 && 
-                  (<Typography
-                    variant={"body2"}
-                    color={"textSecondary"}
+              <Container sx={{ textAlign: 'center' }}>
+                {diaristasRestantes > 0 && (
+                  <Typography
+                    variant={'body2'}
+                    color={'textSecondary'}
                     sx={{ mt: 5 }}
                   >
-                    ...e mais {diaristasRestantes} {diaristasRestantes > 1 ? ' profissionais atendem ' : ' profissional atende '}
-                  </Typography>)
-                }
-                <Button variant={"contained"} color={"secondary"} sx={{ mt: 5 }}>
+                    ...e mais {diaristasRestantes}{' '}
+                    {diaristasRestantes > 1
+                      ? ' profissionais atendem '
+                      : ' profissional atende '}
+                  </Typography>
+                )}
+                <Button
+                  variant={'contained'}
+                  color={'secondary'}
+                  sx={{ mt: 5 }}
+                  onClick={onContratarProfissionais}
+                >
                   Contratar um(a) profissional
                 </Button>
               </Container>
             </ProfissionaisPaper>
-          ) : <Typography align='center' color="textPrimary">Não temos profssionais nessa região!</Typography>
-        )}
+          ) : (
+            <Typography align="center" color="textPrimary">
+              Não temos profssionais nessa região!
+            </Typography>
+          ))}
       </Container>
     </>
   );

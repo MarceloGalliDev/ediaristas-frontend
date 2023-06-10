@@ -1,4 +1,3 @@
-
 declare module "pagarme" {
   export default Pagarme;
 
@@ -20,7 +19,15 @@ declare module "pagarme" {
 
 declare const Pagarme: PagarmeInterface;
 
+interface PagarmeClientInterface {
+  connect: ({ encryption_key: string }) => Promise<PagarmeClientInterface>;
+  security: {
+    encrypt: (card: CardInterface) => Promise<string>;
+  }
+};
+
 interface PagarmeInterface {
-  validate: ({card: CardInterface}) => {card: CardValidateInterface};
+  validate: ({ card: CardInterface }) => { card: CardValidateInterface };
+  client: PagarmeClientInterface;
 };
 

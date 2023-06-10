@@ -1,3 +1,4 @@
+import { ApiLinksInterface } from "./ApiLinksInterface";
 
 export interface DiariaInterface {
   id?: number;
@@ -27,4 +28,6 @@ export interface DiariaInterface {
 
   servico: number;
   nome_servico: string;
+
+  links: ApiLinksInterface[];
 }
