@@ -30,7 +30,7 @@ export default function useApiHateoas<OutputType, Err = unknown>(
   useEffect(() => {
     //preciso forçar a reexecução quando o link ou nome for alterado
     mutate(nome, makeRequest)
-  }, [links, nome]);
+  }, [links, nome, makeRequest]);
   
   return { data, error };
 };

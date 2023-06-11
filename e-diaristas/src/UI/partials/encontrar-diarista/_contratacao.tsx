@@ -44,21 +44,19 @@ const Contratacao: React.FC<PropsWithChildren> = () => {
     podemosAtender,
   } = useContratacao();
   const isMobile = useIsMobile(),
-  dataAtendimento = serviceForm.watch('faxina.data_atendimento');
-
+    dataAtendimento = serviceForm.watch('faxina.data_atendimento');
 
   useEffect(() => {
     BrowserService.scrollToTop();
-  }, [step])
+  }, [step]);
 
-
-  if(!servicos || servicos.length < 1) {
+  if (!servicos || servicos.length < 1) {
     return (
-      <Container sx={{textAlign: "center", my: 10 }}>
+      <Container sx={{ textAlign: 'center', my: 10 }}>
         <CircularProgress />
       </Container>
-    )
-  };
+    );
+  }
 
   return (
     <div>
@@ -67,60 +65,66 @@ const Contratacao: React.FC<PropsWithChildren> = () => {
         selected={breadcrumbItems[step - 1]}
         items={breadcrumbItems}
       />
-
-      {isMobile && [2,3].includes(step) && (
-        <DataList header={
-          <Typography
-            color={'primary'}
-            sx={{ fontWeight:'thin' }}
-          >
-            O valor total do serviço é: {TextFormatService.currency(totalPrice)}
-          </Typography>
-        }
-        body={
-          <>
-            {tipoLimpeza?.nome}
-            <br />
-            Tamanho: {tamanhoCasa.join(', ')}
-            <br />
-            Data: {dataAtendimento}
-          </>
-        }/>
+      {isMobile && [2, 3].includes(step) && (
+        <DataList
+          header={
+            <Typography color={'primary'} sx={{ fontWeight: 'thin' }}>
+              O valor total do serviço é:{' '}
+              {TextFormatService.currency(totalPrice)}
+            </Typography>
+          }
+          body={
+            <>
+              {tipoLimpeza?.nome}
+              <br />
+              Tamanho: {tamanhoCasa.join(', ')}
+              <br />
+              Data: {dataAtendimento}
+            </>
+          }
+        />
       )}
 
-      {step == 1 && <PageTitle title="Nos conte um pouco sobre o serviço" />}
+      {step === 1 && <PageTitle title="Nos conte um pouco sobre o serviço!" />}
 
-      {step == 2 && (
+      {step === 2 && (
         <PageTitle
-          title="Precisamos conhecer um pouco sobre você"
+          title="Precisamos conhecer um pouco sobre você!"
           subtitle={
             !hasLogin ? (
               <span>
                 Caso já tenha cadastro,{' '}
-                <Button onClick={() => setHasLogin(true)}>clique aqui!</Button>
+                <Button onClick={() => setHasLogin(true)}>clique aqui</Button>
               </span>
             ) : (
               <span>
                 Caso não tenha cadastro,{' '}
-                <Button onClick={() => setHasLogin(false)}>clique aqui!</Button>
+                <Button onClick={() => setHasLogin(false)}>clique aqui</Button>
               </span>
             )
           }
         />
       )}
 
-      {step == 3 && <PageTitle title="Informe os dados para pagamento" subtitle={'Será feita uma reserva, mas o valor só será descontado quando você confirmar a presença'}/>}
+      {step === 3 && (
+        <PageTitle
+          title="Informe os dados do cartão para pagamento"
+          subtitle={
+            'Será feita uma reserva, mas o valor só será descontado quando você confirmar a presença do/da diarista'
+          }
+        />
+      )}
 
       <UserFormContainer>
         <PageFormContainer fullWidth={step === 4}>
-          <Paper sx={{p: 4}}>
+          <Paper sx={{ p: 4 }}>
             <FormProvider {...serviceForm}>
               <form
                 onSubmit={serviceForm.handleSubmit(onServiceFormSubmit)}
                 hidden={step !== 1}
               >
-                <DetalheServico 
-                  servicos={servicos} 
+                <DetalheServico
+                  servicos={servicos}
                   podemosAtender={podemosAtender}
                   comodos={tamanhoCasa.length}
                 />
@@ -144,6 +148,7 @@ const Contratacao: React.FC<PropsWithChildren> = () => {
                       {loginErro}
                     </Typography>
                   )}
+
                   <LoginCliente onBack={() => setStep(1)} />
                 </form>
               </FormProvider>
@@ -156,6 +161,7 @@ const Contratacao: React.FC<PropsWithChildren> = () => {
                 </form>
               </FormProvider>
             )}
+
             {step === 4 && (
               <Box sx={{ textAlign: 'center' }}>
                 <Typography sx={{ fontSize: '82px' }} color={'secondary'}>
@@ -171,7 +177,7 @@ const Contratacao: React.FC<PropsWithChildren> = () => {
 
                 <Typography
                   sx={{ mb: 3, maxWidth: '410px', mx: 'auto' }}
-                  color={'textsecondary'}
+                  color={'textSecondary'}
                 >
                   Sua diária foi paga com sucesso! Já estamos procurando o(a)
                   melhor profissional para atender sua residência. Caso
@@ -180,6 +186,7 @@ const Contratacao: React.FC<PropsWithChildren> = () => {
                   também pode cancelar a sua diária sem nenhuma multa até 24
                   horas antes da hora do agendamento.
                 </Typography>
+
                 <Link
                   href="/diarias"
                   Component={Button}
@@ -190,7 +197,6 @@ const Contratacao: React.FC<PropsWithChildren> = () => {
               </Box>
             )}
           </Paper>
-
           {!isMobile && step !== 4 && (
             <SideInformation
               title="Detalhes"
@@ -202,7 +208,7 @@ const Contratacao: React.FC<PropsWithChildren> = () => {
                 },
                 {
                   title: 'Tamanho',
-                  descricao: [...tamanhoCasa],//espalhamos a lista aqui
+                  descricao: tamanhoCasa,
                   icon: 'twf-check-circle',
                 },
                 {
