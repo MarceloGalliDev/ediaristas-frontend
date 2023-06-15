@@ -16,7 +16,7 @@ export const getStaticProps: GetStaticProps = async () => {
 }
 
 const Index: NextPage = () => {
-  const { formMethods } = useLogin()
+  const { formMethods, onSubmit, externalServicesState, errorMessage } = useLogin()
   return (
     <FormProvider {...formMethods}>
       <SafeEnvironment />
@@ -24,20 +24,25 @@ const Index: NextPage = () => {
         <PageTitle title={"Informe seu email e senha"} />
         <LoginContainer
           as={'form'}
-          onSubmit={formMethods.handleSubmit()}
+          onSubmit={formMethods.handleSubmit(onSubmit)}
         >
           <LoginForm />
-          <Typography
-            color={'error'}
-            align={"center"}
-          >
-            Erro
-          </Typography>
+
+          {errorMessage && (
+            <Typography
+              color={'error'}
+              align={"center"}
+            >
+              {errorMessage}
+            </Typography>
+          )}
+          
           <LoginButton
             variant={"contained"}
             size={"large"}
             color={"secondary"}
             type={"submit"}
+            disabled={externalServicesState?.externalService?.length === 0}
           >
             Entrar
           </LoginButton>
