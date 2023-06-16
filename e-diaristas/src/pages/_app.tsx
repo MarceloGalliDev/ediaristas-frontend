@@ -25,7 +25,7 @@ function App(props: MyAppProps) {
   useRouterGuard(userState.user, userState.isLogging);
 
   function canShow(): boolean {
-    return false;
+    return true;
   }
   return (
     <CacheProvider value={emotionCache}>
