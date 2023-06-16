@@ -1,6 +1,6 @@
 import "@styles/globals.css";
 import type { AppProps } from "next/app"
-import { ThemeProvider } from "@mui/material"; 
+import { CircularProgress, Container, ThemeProvider } from "@mui/material"; 
 import theme from "../UI/themes/theme"
 import Header from "UI/components/surfaces/Header/Header";
 import Footer from "UI/components/surfaces/Footer/Footer";
@@ -11,6 +11,8 @@ import { CacheProvider, EmotionCache } from "@emotion/react";
 import createEmotionCache from "../data/services/createEmotionCache";
 import { AppContainer } from "@styles/pages/AppContainer.styled";
 import { MainProvider } from "data/contexts/MainContext";
+import useRouterGuard from "data/hook/useRouterGuard.hook";
+import { UserContext } from "data/contexts/UserContext";
 
 const clientSideEmotionCache = createEmotionCache();
 export interface MyAppProps extends AppProps {
@@ -19,6 +21,12 @@ export interface MyAppProps extends AppProps {
 
 function App(props: MyAppProps) {
   const { Component, emotionCache = clientSideEmotionCache, pageProps } = props;
+  const { userState } = React.useContext(UserContext);
+  useRouterGuard(userState.user, userState.isLogging);
+
+  function canShow(): boolean {
+    return false;
+  }
   return (
     <CacheProvider value={emotionCache}>
       <Head>
@@ -30,7 +38,15 @@ function App(props: MyAppProps) {
         <AppContainer>
           <Header />
           <main>
-            <Component {...pageProps} />
+            {canShow() ? (
+              <Component {...pageProps} />
+            ) : (
+              <Container
+                sx={{ textAlign: 'center', my:10 }}
+              >
+                <CircularProgress />
+              </Container>
+            )}
           </main>
           <Footer />
         </AppContainer>
