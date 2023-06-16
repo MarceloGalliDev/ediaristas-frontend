@@ -4,15 +4,16 @@ import { CircularProgress, Container, ThemeProvider } from "@mui/material";
 import theme from "../UI/themes/theme"
 import Header from "UI/components/surfaces/Header/Header";
 import Footer from "UI/components/surfaces/Footer/Footer";
-import * as React from "react";
+import React, { useContext } from 'react';
 import Head from "next/head";
 import CssBaseline from "@mui/material/CssBaseline";
 import { CacheProvider, EmotionCache } from "@emotion/react";
 import createEmotionCache from "../data/services/createEmotionCache";
 import { AppContainer } from "@styles/pages/AppContainer.styled";
 import { MainProvider } from "data/contexts/MainContext";
-import useRouterGuard from "data/hook/useRouterGuard.hook";
+import useRouterGuard, { privateRoutes } from "data/hook/useRouterGuard.hook";
 import { UserContext } from "data/contexts/UserContext";
+import { LoginService } from "data/services/LoginService";
 
 const clientSideEmotionCache = createEmotionCache();
 export interface MyAppProps extends AppProps {
@@ -21,12 +22,24 @@ export interface MyAppProps extends AppProps {
 
 function App(props: MyAppProps) {
   const { Component, emotionCache = clientSideEmotionCache, pageProps } = props;
-  const { userState } = React.useContext(UserContext);
-  useRouterGuard(userState.user, userState.isLogging);
+  const { userState } = useContext(UserContext);
+  const router = useRouterGuard(userState.user, userState.isLogging);
 
   function canShow(): boolean {
+    if (privateRoutes.includes(router.pathname)) {
+      if (userState.isLogging) {
+        return false;
+      }
+      return userState.user.nome_completo.length > 0;
+    }
     return true;
   }
+
+  async function onLogout() {
+    await LoginService.logout();
+    window.location.reload();
+  }
+  
   return (
     <CacheProvider value={emotionCache}>
       <Head>
