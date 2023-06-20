@@ -14,10 +14,10 @@ import { FormProvider } from 'react-hook-form';
 import DetalheServico from './_detalhe-servico';
 import CadastroCliente, { LoginCliente } from './_cadastro-cliente';
 import InformacoesPagamento from './_informacoes-pagamento';
-import Link from 'UI/components/navigation/Links/Links';
 import { TextFormatService } from 'data/services/TextFormatService';
 import DataList from 'UI/components/data-display/DataList/DataList';
 import { BrowserService } from 'data/services/BrowserService';
+import LinkV2 from 'UI/components/navigation/Links/LinksV2';
 //import {  } from 'react';
 //import { ComponentName } from './_contratacao.styled'; 
 
@@ -187,13 +187,13 @@ const Contratacao: React.FC<PropsWithChildren> = () => {
                   horas antes da hora do agendamento.
                 </Typography>
 
-                <Link
+                <LinkV2
                   href="/diarias"
                   Component={Button}
                   mui={{ color: 'secondary', variant: 'contained' }}
                 >
                   Ir para minhas diárias
-                </Link>
+                </LinkV2>
               </Box>
             )}
           </Paper>

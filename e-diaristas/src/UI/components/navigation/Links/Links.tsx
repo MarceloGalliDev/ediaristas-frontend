@@ -1,48 +1,47 @@
-import NextLink, { LinkProps as NextLinkProps } from 'next/link'
-import { Link as MuiLink, LinkProps as MuiLinkProps, ButtonProps } from "@mui/material"
-import { PropsWithChildren } from 'react';
+import NextLink, { LinkProps as NextLinkProps } from 'next/link';
+import {
+  Link as MuiLink,
+  LinkProps as MuiLinkProps,
+  ButtonProps,
+} from '@mui/material';
 import Router from 'next/router';
-import { styled } from "@mui/material/styles";
+import { PropsWithChildren } from 'react';
 
 //definindo props para nosso componente
 //mui? é tipagem derivada do mui material
 //Component?: React.ElementType; estamos definindo a tipagem para que seja um componente básico do react
 
-interface LinkProps {
+export interface LinkProps {
   href: string;
   mui?: MuiLinkProps | ButtonProps;
   next?: NextLinkProps;
   Component?: React.ElementType;
-  target?: string;
-  rel?: string;
   onClick?: () => void;
 }
 
-const Anchor = styled("a")({});
-
-const Link: React.FC<PropsWithChildren<LinkProps>> = ({ 
+const Link: React.FC<PropsWithChildren<LinkProps>> = ({
   children,
   href,
-  mui,
   next,
-  target,
-  rel,
+  mui,
   Component = MuiLink,
   ...props
- }) => {
+}) => {
   const isNextEnv = Boolean(Router.router);
 
-  return isNextEnv ? (
-    <NextLink href={href} {...next} passHref>
+  return (
+    isNextEnv ? (
+      <NextLink href={href} passHref {...next}>
         <Component {...mui} {...props}>
           {children}
         </Component>
-    </NextLink>
-  ) : (
-    <Component href={href} {...mui} {...props}>
+      </NextLink>
+    ) : (
+      <Component href={href} {...mui} {...props}>
         {children}
-    </Component>
-);
+      </Component>
+    )
+  )
 };
 
 export default Link;

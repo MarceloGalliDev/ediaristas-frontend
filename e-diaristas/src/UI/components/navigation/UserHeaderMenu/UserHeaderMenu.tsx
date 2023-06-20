@@ -1,10 +1,10 @@
 import { UserInterface } from 'data/@types/UserInterface';
-import React, {PropsWithChildren, useRef} from 'react';
-import { UserHeaderMenuContainer, UserMenu } from './UserHeaderMenu.styled';
+import React, { PropsWithChildren, useRef } from 'react';
 import UserProfileAvatar from 'UI/components/data-display/UserProfileAvatar/UserProfileAvatar';
-import Link from '../Links/Links';
 // import {} from '@mui/material';
-// import {} from './UserHeaderMenu.styled';
+import { UserHeaderMenuContainer, UserMenu } from './UserHeaderMenu.styled';
+import LinkV2 from '../Links/LinksV2';
+
 
 export interface UserHeaderMenuProps {
   user: UserInterface;
@@ -13,18 +13,16 @@ export interface UserHeaderMenuProps {
   onLogout?: () => void;
   onMenuClick?: (event: React.MouseEvent) => void;
   onMenuClose?: (event: React.MouseEvent) => void;
-
 }
 
-const UserHeaderMenu:React.FC<PropsWithChildren<UserHeaderMenuProps>> = (props) => {
-  const containerRef = useRef(null)
+const UserHeaderMenu: React.FC<PropsWithChildren<UserHeaderMenuProps>> = (
+  props
+) => {
+  const containerRef = useRef(null);
   return (
     <UserHeaderMenuContainer ref={containerRef}>
-      <UserProfileAvatar 
-        user={props.user}
-        onClick={props.onClick}
-      />
-      <UserMenu 
+      <UserProfileAvatar user={props.user} onClick={props.onClick} />
+      <UserMenu
         open={props.isMenuOpen}
         anchorEl={containerRef.current}
         onClose={props.onMenuClose}
@@ -39,24 +37,18 @@ const UserHeaderMenu:React.FC<PropsWithChildren<UserHeaderMenuProps>> = (props) 
         }}
       >
         <li>
-          <Link 
-            href={'/alterar-dados'}
-          >
-            Alterar dados
-          </Link>
+          <LinkV2 href="/alterar-dados" mui={{ color: 'inherit' }}>
+            Alterar Dados
+          </LinkV2>
         </li>
         <li>
-          <Link 
-            href={''} 
-            onClick={props.onLogout} 
-            mui={{ color: 'inherit'}}
-          >
+          <LinkV2 href="" onClick={props.onLogout} mui={{ color: 'inherit' }}>
             Sair
-          </Link>
+          </LinkV2>
         </li>
       </UserMenu>
     </UserHeaderMenuContainer>
-  )  
-}
+  );
+};
 
-export default UserHeaderMenu
+export default UserHeaderMenu;

@@ -1,18 +1,15 @@
-import { Avatar } from '@mui/material';
-import { styled } from '@mui/material/styles';
-import { UserProfileAvatarProps } from './UserProfileAvatar';
-//import { } from '@mui/material/';
-//import { UserProfileAvatarProps } from './UserProfileAvatar'
+import { Avatar } from "@mui/material";
+import { styled } from "@mui/material/styles";
+import { UserProfileAvatarProps } from "./UserProfileAvatar";
+// import {  } from '@mui/material';
+// import { UserProfileAvatarProps } from './UserProfileAvatar';
 
 export const UserAvatar = styled(Avatar)`
-  font-family: ${({ theme }) => theme.typography.fontFamily};
   border: solid 2px currentColor;
-
 `;
 
-export const AvatarIcon = styled('i')<UserProfileAvatarProps>`
-  font-family: ${({ theme }) => theme.typography.fontFamily};
+export const AvatarIcon = styled("i")<UserProfileAvatarProps>`
   font-size: ${({ theme }) => theme.spacing(1)};
   vertical-align: middle;
-  display: ${({ user }) => user.nome_completo ? 'initial' : 'none'};
+  display: ${({ user }) => (user.nome_completo ? "initial" : "none")};
 `;

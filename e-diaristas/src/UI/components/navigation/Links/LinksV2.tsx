@@ -78,7 +78,7 @@ const LinkV2 = React.forwardRef<HTMLAnchorElement, LinkProps>(function Link(prop
     noLinkStyle,
     prefetch,
     replace,
-    role, // Link don't have roles.
+    role, 
     scroll,
     shallow,
     ...other

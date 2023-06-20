@@ -1,6 +1,7 @@
 import { Button, Grid, Skeleton, Typography } from '@mui/material';
 import { UserInterface } from 'data/@types/UserInterface';
-import React, {PropsWithChildren} from 'react';
+import React, { PropsWithChildren } from 'react';
+// import {} from '@mui/material';
 import { UserAvatar, AvatarIcon } from './UserProfileAvatar.styled';
 
 export interface UserProfileAvatarProps {
@@ -8,12 +9,13 @@ export interface UserProfileAvatarProps {
   onClick?: (event: React.MouseEvent) => void;
 }
 
-const UserProfileAvatar:React.FC<PropsWithChildren<UserProfileAvatarProps>> = (props) => {
+const UserProfileAvatar: React.FC<PropsWithChildren<UserProfileAvatarProps>> = (
+  props
+) => {
   const hasUser = props.user.nome_completo.length > 0;
-
   return (
-    <Button onClick={props.onClick} color={'inherit'}>
-      <Grid container wrap={'nowrap'} spacing={1}>
+    <Button color={'inherit'} onClick={props.onClick}>
+      <Grid container spacing={1} wrap="nowrap">
         <Grid item>
           {hasUser ? (
             <UserAvatar
@@ -34,20 +36,20 @@ const UserProfileAvatar:React.FC<PropsWithChildren<UserProfileAvatarProps>> = (p
         <Grid item container spacing={1} alignItems={'center'}>
           <Grid item>
             {hasUser ? (
-              <Typography variant={'body2'} noWrap>
+              <Typography variant="body2" noWrap>
                 {props.user.nome_completo}
               </Typography>
             ) : (
               <Skeleton width={100} variant={'text'} animation={'wave'} />
             )}
-            <Grid item>
-              <AvatarIcon className="twf-caret-down" {...props} />
-            </Grid>
+          </Grid>
+          <Grid item>
+            <AvatarIcon className="twf-caret-down" {...props} />
           </Grid>
         </Grid>
       </Grid>
     </Button>
-  );  
-}
+  );
+};
 
-export default UserProfileAvatar
+export default UserProfileAvatar;

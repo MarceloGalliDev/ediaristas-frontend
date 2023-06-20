@@ -2,7 +2,7 @@ import { LoginData } from "../UserForm.styled"
 import TextField from "../../TextField/TextField"
 import { useFormContext } from "react-hook-form"
 import { FormValues } from "data/@types/forms/FormValue"
-import Link from "UI/components/navigation/Links/Links"
+import LinkV2 from "UI/components/navigation/Links/LinksV2"
 
 export const LoginForm = () => {
   const {
@@ -29,11 +29,11 @@ export const LoginForm = () => {
         helperText={ errors.login?.password?.message}
       />
 
-      <Link 
+      <LinkV2 
         href='/recuperar-senha'
       >
         Esqueci minha senha
-      </Link>
+      </LinkV2>
     </LoginData>
   )
 }

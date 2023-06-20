@@ -9,7 +9,6 @@ import {
   FooterSocialList,
   SocialButton,
 } from "./Footer.styled";
-import Link from "UI/components/navigation/Links/Links";
 import LinkV2 from "UI/components/navigation/Links/LinksV2";
 
 const Footer = () => {

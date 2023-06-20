@@ -6,7 +6,6 @@ import { styled } from '@mui/material/styles';
 export const UserHeaderMenuContainer = styled('div')`
   font-family: ${({ theme }) => theme.typography.fontFamily};
   display: inline-block;
-
 `;
 
 export const UserMenu = styled(Menu)`
@@ -23,5 +22,7 @@ export const UserMenu = styled(Menu)`
   li {
     box-sizing: border-box;
     padding: ${({ theme }) => theme.spacing(1, 2)};
+    display: flex;
+    flex-direction: column
   }
 `;
