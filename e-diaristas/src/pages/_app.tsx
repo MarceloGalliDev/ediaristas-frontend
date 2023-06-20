@@ -14,6 +14,7 @@ import { MainProvider } from "data/contexts/MainContext";
 import useRouterGuard, { privateRoutes } from "data/hook/useRouterGuard.hook";
 import { UserContext } from "data/contexts/UserContext";
 import { LoginService } from "data/services/LoginService";
+import { UserInterface } from "data/@types/UserInterface";
 
 const clientSideEmotionCache = createEmotionCache();
 export interface MyAppProps extends AppProps {
@@ -49,14 +50,12 @@ function App(props: MyAppProps) {
       <ThemeProvider theme={theme}>
         <CssBaseline />
         <AppContainer>
-          <Header />
+          <Header user={userState.user} onLogout={onLogout} />
           <main>
             {canShow() ? (
               <Component {...pageProps} />
             ) : (
-              <Container
-                sx={{ textAlign: 'center', my:10 }}
-              >
+              <Container sx={{ textAlign: 'center', my: 10 }}>
                 <CircularProgress />
               </Container>
             )}

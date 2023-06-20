@@ -2,8 +2,9 @@ import { ApiLinksInterface } from 'data/@types/ApiLinksInterface';
 import { CidadeInterface, EnderecoInterface } from 'data/@types/EnderecoInterface';
 import { UserInterface, UserType } from 'data/@types/UserInterface';
 import { ApiService } from 'data/services/ApiService';
+import { LoginService } from 'data/services/LoginService';
 import { produce } from 'immer';
-import React, { useReducer } from 'react';
+import React, { useEffect, useReducer } from 'react';
 
 export type InitialStateType = typeof initialState;
 
@@ -75,6 +76,23 @@ export interface UserReducerInterface {
 //useReducer possui dois campos como paramêtro, campo redutor e o valor inicial da variável
 export function useUserReducer(): UserReducerInterface {
   const [state, dispatch] = useReducer(reducer, initialState);
+
+  useEffect(() => {
+    getUser()
+  }, [state.user.id]);
+
+  async function getUser() {
+    try {
+      const user = await LoginService.getUser();
+      if(user){
+        dispatch({ type: 'SET_USER', payload: user });
+      }
+    } catch (error) {
+      
+    } finally {
+      dispatch({type: 'SET_LOGGING', payload: false});
+    }
+  }
 
   return {
     userState: state,

@@ -15,6 +15,7 @@ interface LinkProps {
   Component?: React.ElementType;
   target?: string;
   rel?: string;
+  onClick?: () => void;
 }
 
 const Anchor = styled("a")({});
