@@ -50,8 +50,8 @@ export function useDiariaReducer(): DiariaReducerInterface {
   //dados do contexto do user
   const { userState } = useContext(UserContext);
 
-  //consultando o hateoas para buscar o link de vínculo
-  const diarias = useApiHateoas<DiariaInterface[]>(userState.user.links, 'lista_diarias');
+  //consultando o hateoas para buscar o link de vínculo, do usuario logado
+  const diarias = useApiHateoas<DiariaInterface[]>(userState.user.links, 'lista_diarias').data;
 
   useEffect(() => {
     if(diarias) {

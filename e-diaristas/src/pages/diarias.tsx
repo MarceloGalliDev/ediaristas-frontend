@@ -1,4 +1,5 @@
 import MinhasDiarias from "@partials/diarias/_minhas-diarias";
+import { DiariaProvider } from "data/contexts/DiariaContext";
 import type { GetStaticProps, NextPage } from "next";
 
 export const getStaticProps: GetStaticProps = async () => {
@@ -11,10 +12,10 @@ export const getStaticProps: GetStaticProps = async () => {
 
 const Index: NextPage = () => {
   return (
-    <div>
+    <DiariaProvider>
       <MinhasDiarias />
-    </div>
-  )
+    </DiariaProvider>
+  );
 }
 
 export default Index;

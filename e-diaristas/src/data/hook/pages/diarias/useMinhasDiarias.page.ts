@@ -5,9 +5,18 @@ import { useContext } from "react";
 
 export default function useMinhasDiarias() {
   const isMobile = useIsMobile(),
-    { diariaState } = useContext(DiariaContext),
-    { diarias } = diariaState,
+    { 
+      diariaState: { diarias }
+    } = useContext(DiariaContext),
+    filteredData = diarias,
     { currentPage, setCurrentPage, totalPages, itemsPerPage } = usePagination([], 5);
 
-  return { isMobile, currentPage, setCurrentPage, totalPages, itemsPerPage };
+  return {
+    isMobile,
+    currentPage,
+    setCurrentPage,
+    totalPages,
+    itemsPerPage,
+    filteredData,
+  };
 }
