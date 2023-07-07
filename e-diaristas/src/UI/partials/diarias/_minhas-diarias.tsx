@@ -19,6 +19,10 @@ const MinhasDiarias: React.FC<PropsWithChildren> = () => {
     totalPages,
     itemsPerPage,
     filteredData,
+    podeVisualizar,
+    podeCancelar,
+    podeConfirmar,
+    podeAvaliar,
   } = useMinhasDiarias(); 
 
   return (
@@ -28,44 +32,57 @@ const MinhasDiarias: React.FC<PropsWithChildren> = () => {
         isMobile ? (
           <>
             {filteredData.map((item) => {
-              return (<DataList 
-                key={item.id}
-                header={
-                  <>
-                    Data: {TextFormatService.reverseDate(item.data_atendimento as string)}
-                    <br/>
-                    {item.nome_servico}
-                  </>
-                }
-                body={
-                  <>
-                    Status: {DiariaService.getStatus(item.status!).label}
-                    <br/>
-                    Valor: {TextFormatService.currency(item.preco)}
-                  </>
-                }
-
-                actions={
-                  <>
-                    <Button 
-                      component={LinkV2} 
-                      href=''
-                      color={'inherit'}
-                      variant={'outlined'}
-                    >
-                      Detalhes
-                    </Button>
-
-                    <Button
-                      color={'error'}
-                      variant={'contained'}
-                    >
-                      Cancelado
-                    </Button>
-                  </>
-                }
-              />
-              )
+              return (
+                <DataList
+                  key={item.id}
+                  header={
+                    <>
+                      Data:{' '}
+                      {TextFormatService.reverseDate(
+                        item.data_atendimento as string
+                      )}
+                      <br />
+                      {item.nome_servico}
+                    </>
+                  }
+                  body={
+                    <>
+                      Status: {DiariaService.getStatus(item.status!).label}
+                      <br />
+                      Valor: {TextFormatService.currency(item.preco)}
+                    </>
+                  }
+                  actions={
+                    <>
+                      {podeVisualizar(item) && (
+                        <Button
+                          component={LinkV2}
+                          href={`?id=${item.id}`}
+                          color={'inherit'}
+                          variant={'outlined'}
+                        >
+                          Detalhes
+                        </Button>
+                      )}
+                      {podeCancelar(item) && (
+                        <Button color={'error'} variant={'contained'}>
+                          Cancelado
+                        </Button>
+                      )}
+                      {podeConfirmar(item) && (
+                        <Button color={'success'} variant={'contained'}>
+                          Confirmar Presença
+                        </Button>
+                      )}
+                      {podeAvaliar(item) && (
+                        <Button color={'success'} variant={'contained'}>
+                          Avaliar
+                        </Button>
+                      )}
+                    </>
+                  }
+                />
+              );
             })}
           </>
         ) : (
@@ -101,11 +118,21 @@ const MinhasDiarias: React.FC<PropsWithChildren> = () => {
                   </TableCell>
 
                   <TableCell>
-                    <LinkV2 href={''}>Detalhes</LinkV2>
+                    {podeVisualizar(item) && (
+                      <LinkV2 href={`?id=${item.id}`}>Detalhes</LinkV2>
+                    )}
                   </TableCell>
 
                   <TableCell>
-                    <Button color={'error'}>Cancelar</Button>
+                    {podeCancelar(item) && (
+                      <Button color={'error'}>Cancelar</Button>
+                    )}
+                    {podeConfirmar(item) && (
+                      <Button color={'success'}>Confirmar presença</Button>
+                    )}
+                    {podeAvaliar(item) && (
+                      <Button color={'success'}>Avaliar</Button>
+                    )}
                   </TableCell>
 
                 </TableRow>
@@ -125,4 +152,4 @@ const MinhasDiarias: React.FC<PropsWithChildren> = () => {
   );
 };
 
-zzzzzzzzzzzzzzzzzzzzzzzzz
+export default MinhasDiarias;
