@@ -32,5 +32,12 @@ export const DateService = {
     dataMin.setFullYear(dataMin.getFullYear() - 18)
     return dataMin;
   },
+
+  getTimeFromDate(date: string): string {
+    //2022:00:00T00:00:00
+    const [_, time] = date.split('T'),
+      [hours, minutes, ..._rest] = time.split(':')
+    return `${hours}:${minutes}`
+  }
 };
 
