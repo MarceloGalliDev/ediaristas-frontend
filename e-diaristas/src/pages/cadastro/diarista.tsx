@@ -3,6 +3,7 @@ import PageTitle from "UI/components/data-display/PageTitle/PageTitle";
 import SideInformation from "UI/components/data-display/SideInformation/SideInformation";
 import SafeEnvironment from "UI/components/feedback/SafeEnvironment/SafeEnvironment";
 import { AddressForm, PageFormContainer, PictureForm, UserDataForm, UserFormContainer } from "UI/components/inputs/UserForm/UserForm";
+import { CitiesForm } from "UI/components/inputs/UserForm/forms/CitiesForm";
 import FinancialForm from "UI/components/inputs/UserForm/forms/FinancialForm";
 import NewContactForm from "UI/components/inputs/UserForm/forms/NewContactForm";
 import BreadCrumb from "UI/components/navigation/BreadCrumb/BreadCrumb";
@@ -24,7 +25,7 @@ export const getStaticProps: GetStaticProps = async () => {
 };
 
 const Index: NextPage = () => {
-  const {breadcrumbsItems, step, setStep, userForm} = useCadastroDiarista(),
+  const {breadcrumbsItems, step, setStep, userForm, addressListForm} = useCadastroDiarista(),
     isMobile = useIsMobile();
 
   useEffect(() => {
@@ -117,6 +118,31 @@ const Index: NextPage = () => {
                   </Button>
                 </Container>
 
+              </Paper>
+            </FormProvider>
+          )}
+
+          {step === 2 && (
+            <FormProvider {...addressListForm}>
+              <Paper
+                component={'form'}
+                sx={{ p: 4}}
+              >
+                <Typography sx={{fontWeight: 'bold', pb: 2}}>
+                  Selecione a cidade
+                </Typography>
+                <CitiesForm estado={'PR'}/>
+                <Container
+                  sx={{textAlign: 'center'}}
+                >
+                  <Button
+                    variant="contained"
+                    color="secondary"
+                    type={"submit"}
+                  >
+                    Finalizar o cadastro
+                  </Button>
+                </Container>
               </Paper>
             </FormProvider>
           )}

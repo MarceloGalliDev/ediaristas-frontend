@@ -13,7 +13,8 @@ export default function useCadastroDiarista(){
           .concat(FormSchemaService.address())
           .concat(FormSchemaService.newContact())
       ),
-    });
+    }),
+    addressListForm = useForm<CadastroDiariaFormDataInterface>();
   
-  return { step, setStep, breadcrumbsItems, userForm };
+  return { step, setStep, breadcrumbsItems, userForm, addressListForm };
 }
