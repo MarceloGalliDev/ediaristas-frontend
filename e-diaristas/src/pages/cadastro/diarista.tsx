@@ -1,6 +1,7 @@
 import { Button, Container, Divider, Paper, Typography } from "@mui/material";
 import PageTitle from "UI/components/data-display/PageTitle/PageTitle";
 import SideInformation from "UI/components/data-display/SideInformation/SideInformation";
+import Dialog from "UI/components/feedback/Dialog/Dialog";
 import SafeEnvironment from "UI/components/feedback/SafeEnvironment/SafeEnvironment";
 import { AddressForm, PageFormContainer, PictureForm, UserDataForm, UserFormContainer } from "UI/components/inputs/UserForm/UserForm";
 import { CitiesForm } from "UI/components/inputs/UserForm/forms/CitiesForm";
@@ -25,7 +26,14 @@ export const getStaticProps: GetStaticProps = async () => {
 };
 
 const Index: NextPage = () => {
-  const {breadcrumbsItems, step, setStep, userForm, addressListForm} = useCadastroDiarista(),
+  const {
+      breadcrumbsItems,
+      step,
+      setStep,
+      userForm,
+      addressListForm,
+      onUserSubmit,
+    } = useCadastroDiarista(),
     isMobile = useIsMobile();
 
   useEffect(() => {
@@ -67,41 +75,45 @@ const Index: NextPage = () => {
         <PageFormContainer>
           {step === 1 && (
             <FormProvider {...userForm}>
-              <Paper sx={{ p: 4 }} component={'form'} onSubmit={() => {}}>
-
+              <Paper
+                sx={{ p: 4 }}
+                component={'form'}
+                onSubmit={userForm.handleSubmit(onUserSubmit)}
+              >
                 <Typography sx={{ fontWeight: 'bold', pb: 2 }}>
                   Dados pessoais
                 </Typography>
                 <UserDataForm cadastro={true} />
 
-                <Divider sx={{ mb: 5 }}/>
+                <Divider sx={{ mb: 5 }} />
 
                 <Typography sx={{ fontWeight: 'bold', pb: 2 }}>
                   Financeiro
                 </Typography>
                 <FinancialForm />
 
-                <Divider sx={{ mb: 5 }}/>
+                <Divider sx={{ mb: 5 }} />
 
                 <Typography sx={{ fontWeight: 'bold' }}>
                   A hora do self! Envie uma self segurando o documento.
                 </Typography>
                 <Typography sx={{ pb: 2 }}>
-                  Para sua segurança, obrigatório para todos os profissionais e clientes.
+                  Para sua segurança, obrigatório para todos os profissionais e
+                  clientes.
                 </Typography>
                 <PictureForm />
-                <Typography sx={{ pt:1, pb: 2 }}>
+                <Typography sx={{ pt: 1, pb: 2 }}>
                   Essa foto não será vista por ninguém.
                 </Typography>
 
-                <Divider sx={{ mb: 5 }}/>
+                <Divider sx={{ mb: 5 }} />
 
                 <Typography sx={{ fontWeight: 'bold', pb: 2 }}>
                   Endereço
                 </Typography>
                 <AddressForm />
 
-                <Divider sx={{ mb: 5 }}/>
+                <Divider sx={{ mb: 5 }} />
 
                 <Typography sx={{ fontWeight: 'bold', pb: 2 }}>
                   Dados de acesso
@@ -117,29 +129,19 @@ const Index: NextPage = () => {
                     Cadastrar e escolher cidades
                   </Button>
                 </Container>
-
               </Paper>
             </FormProvider>
           )}
 
           {step === 2 && (
             <FormProvider {...addressListForm}>
-              <Paper
-                component={'form'}
-                sx={{ p: 4}}
-              >
-                <Typography sx={{fontWeight: 'bold', pb: 2}}>
+              <Paper component={'form'} sx={{ p: 4 }}>
+                <Typography sx={{ fontWeight: 'bold', pb: 2 }}>
                   Selecione a cidade
                 </Typography>
-                <CitiesForm estado={'PR'}/>
-                <Container
-                  sx={{textAlign: 'center'}}
-                >
-                  <Button
-                    variant="contained"
-                    color="secondary"
-                    type={"submit"}
-                  >
+                <CitiesForm estado={'PR'} />
+                <Container sx={{ textAlign: 'center' }}>
+                  <Button variant="contained" color="secondary" type={'submit'}>
                     Finalizar o cadastro
                   </Button>
                 </Container>
@@ -174,6 +176,16 @@ const Index: NextPage = () => {
           )}
         </PageFormContainer>
       </UserFormContainer>
+      <Dialog
+        title={'Cadastro realiza com sucesso'}
+        noCancel
+        confirmLabel={'Ver oportunidades'}
+        isOpen={true}
+        onConfirm={() => window.location.reload()}
+        onClose={() => {}}
+      >
+        Agora você pode vizualizar as oportunidades disponívels
+      </Dialog>
     </div>
   );
 }
@@ -181,3 +193,5 @@ const Index: NextPage = () => {
 export default Index;
 
 //pegamos o breadcrumb e colocamos na posição step, que é igual a 1, e subtraímos para termos a posição 0
+//apos confirmado o cadastro, confirmando o componente Dialog, nos vamos armazenar diretamente no localstorage o token dessa diaria
+//depois de salvo no localstorage a página é direcionada para página de oportunidades

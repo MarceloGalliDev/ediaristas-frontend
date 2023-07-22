@@ -13,7 +13,7 @@ export interface CadastroUserInterface {
 
 export interface CadastroClienteFormDataInterface extends CadastroUserInterface {};
 
-export interface CadastroDiariaFormDataInterface extends CadastroUserInterface{
+export interface CadastroDiaristaFormDataInterface extends CadastroUserInterface{
   endereco?: EnderecoInterface;
   enderecoAtendidos?: CidadeInterface[];
 };

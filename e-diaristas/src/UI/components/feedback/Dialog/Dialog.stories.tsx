@@ -15,9 +15,29 @@ export const ComponentStory: Story = {
   render: (args: any) => <Dialog {...args} />,
   args: {},
   argTypes: {
-    argumentoName: {
-      description: 'Componente para verificar o nível de força de password',
-      defaultValue: '',
+    isOpen: {
+      description: 'confirma se está aberto ou fechado a janela',
+      defaultValue: true,
+    },
+    title: {
+      description: 'titulo',
+      defaultValue: 'Confirmar presença da diarista',
+    },
+    subtitle: {
+      description: 'subtitulo',
+      defaultValue: 'Tem certeza que deseja confirmar presença da diarista',
+    },
+    children: {
+      description: 'caixa de texto',
+      defaultValue: 'Texto',
+    },
+    noConfirm: {
+      description: 'função para aparecer o botão confirmar no Dialog',
+      defaultValue: true,
+    },
+    noCancel: {
+      description: 'função para aparecer o botão confirmar no Dialog',
+      defaultValue: true,
     },
   },
 };
