@@ -33,6 +33,11 @@ const Index: NextPage = () => {
       userForm,
       addressListForm,
       onUserSubmit,
+      load,
+      onAddressSubmit,
+      enderecoAtendidos,
+      newAddress,
+      sucessoCadastro,
     } = useCadastroDiarista(),
     isMobile = useIsMobile();
 
@@ -125,6 +130,7 @@ const Index: NextPage = () => {
                     variant={'contained'}
                     color={'secondary'}
                     type={'submit'}
+                    disabled={load}
                   >
                     Cadastrar e escolher cidades
                   </Button>
@@ -135,13 +141,24 @@ const Index: NextPage = () => {
 
           {step === 2 && (
             <FormProvider {...addressListForm}>
-              <Paper component={'form'} sx={{ p: 4 }}>
+              <Paper
+                component={'form'}
+                sx={{ p: 4 }}
+                onSubmit={addressListForm.handleSubmit(onAddressSubmit)}
+              >
                 <Typography sx={{ fontWeight: 'bold', pb: 2 }}>
                   Selecione a cidade
                 </Typography>
-                <CitiesForm estado={'PR'} />
+                {newAddress && (
+                  <CitiesForm estado={newAddress?.estado as string} />
+                )}
                 <Container sx={{ textAlign: 'center' }}>
-                  <Button variant="contained" color="secondary" type={'submit'}>
+                  <Button
+                    variant="contained"
+                    color="secondary"
+                    type={'submit'}
+                    disabled={load || enderecoAtendidos?.length === 0}
+                  >
                     Finalizar o cadastro
                   </Button>
                 </Container>
@@ -180,7 +197,7 @@ const Index: NextPage = () => {
         title={'Cadastro realiza com sucesso'}
         noCancel
         confirmLabel={'Ver oportunidades'}
-        isOpen={true}
+        isOpen={sucessoCadastro}
         onConfirm={() => window.location.reload()}
         onClose={() => {}}
       >
